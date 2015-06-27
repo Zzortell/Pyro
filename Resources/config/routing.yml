@@ -1,0 +1,3 @@
+zz_pyro_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ZzPyroBundle:Default:index }
