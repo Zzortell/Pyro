@@ -1,0 +1,54 @@
+@import "layout.less";
+
+header
+{
+	.make-sm-column(12);
+	
+	background-color: @color_header;
+	color: @color_header_font;
+	
+	a
+	{
+		color: @color_header_link;
+	}
+}
+
+#bodier
+{
+	.make-sm-column(12);
+	.make-row;
+	margin: 0;
+	padding: 0;
+	
+	#content
+	{
+		.make-sm-column(8);
+		
+		article
+		{
+			background-color: @color_article;
+			padding: 10px;
+			margin: 15px;
+		}
+	}
+	
+	#part
+	{
+		.make-sm-column(4);
+		background-color: @color_part;
+	}
+	
+	.after
+	{
+		content: '';
+		position: absolute !important;
+		top: 0;
+		bottom: 0;
+		z-index: -1;
+		right: 0;
+		
+		background-color: @color_part;
+		.make-sm-column(4);
+		padding: 0;
+	}
+}

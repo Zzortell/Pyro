@@ -1,0 +1,68 @@
+{% extends 'ZzPyroBundle::layout.html.twig' %}
+
+{% trans_default_domain 'ZzPyroBundle_index' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{% stylesheets 'bundles/zzpyro/css/index.less' filter='cssrewrite' %}
+		<link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block js_lib %}
+	{{ parent() }}
+	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/zzpyro/js/user.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<header>
+			<h1>{{ 'header.sitename' |trans }}</h1>
+			<p>{{ 'header.subtitle' |trans }}</p>
+			<p>
+				<a href="https://www.youtube.com/user/DansLeDoute">
+					{{ 'header.link_yt' |trans }}
+				</a>
+			</p>
+			<p>
+				<a href="https://www.youtube.com/user/izzyManiaKK">
+					{{ 'header.link_izzi' |trans }}
+				</a>
+			</p>
+			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+				<a href="{{ path('fos_user_security_logout') }}">
+					{{ 'header.logout' |trans }}
+				</a>
+			{% endif %}
+		</header>
+		<section id="bodier">
+			<section id="content">
+				<article>
+					<h1>Les derniers best-of</h1>
+				</article>
+				<article>
+					<h1>Objectif de la semaine</h1>
+				</article>
+				<article>
+					<h1>Vidéos à couvrir</h1>
+				</article>
+			</section>
+			<section id="part">
+				{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+					<section id="user_login_container"
+							 path="{{ path('fos_user_security_login') }}">
+					</section>
+					<section id="user_register_container"
+							 path="{{ path('fos_user_registration_register') }}">
+					</section>
+				{% endif %}
+			</section>
+			<div class="after"></div>
+		</section>
+	</div>
+{% endblock %}

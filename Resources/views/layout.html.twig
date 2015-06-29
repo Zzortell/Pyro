@@ -1,0 +1,13 @@
+{% extends 'ZzCoreBundle::base.html.twig' %}
+
+{% trans_default_domain 'ZzPyroBundle' %}
+
+{% block title %}{{ 'title' |trans }} - {{ parent() }}{% endblock %}
+
+{% block css_lib %}
+	{{ parent() }}
+	{# {% stylesheets 'bundles/zzpyro/css/bootstrap/dist/css/bootstrap.css' filter='cssrewrite' %}
+		<link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %} #}
+</head>
+{% endblock %}

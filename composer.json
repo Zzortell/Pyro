@@ -1,0 +1,20 @@
+{
+    "name": "zzortell/zz-pyro-bundle",
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/Zzortell/ZzPyroBundle",
+    "authors": [
+        {
+            "name": "Rémi Blaise",
+            "email": "remi.blaise@gmx.fr",
+            "homepage": "http://php-zzortell.rhcloud.com/"
+        }
+    ],
+    
+	"require": {
+        "zzortell/zz-core-bundle": "~1.1"
+    },
+	
+    "autoload": {
+        "psr-4": {"Zz\\PyroBundle\\": ""}
+    }
+}
