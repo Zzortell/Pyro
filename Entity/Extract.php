@@ -3,6 +3,8 @@
 namespace Zz\PyroBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Extract
@@ -25,6 +27,9 @@ class Extract
      * @var integer
      *
      * @ORM\Column(name="start_seconds", type="integer")
+     * @Assert\Type("integer")
+     * @Assert\GreaterThanOrEqual(0)
+     * @Assert\NotNull
      */
     protected $startSeconds;
 
@@ -32,6 +37,8 @@ class Extract
      * @var integer
      *
      * @ORM\Column(name="end_seconds", type="integer")
+     * @Assert\Type("integer")
+     * @Assert\NotNull
      */
     protected $endSeconds;
     
@@ -42,10 +49,45 @@ class Extract
     protected $author;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Zz\PyroBundle\Entity\Video")
+     * @ORM\ManyToOne(targetEntity="Zz\PyroBundle\Entity\Video", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid
      */
     protected $video;
+    
+    /**
+     * @Assert\Callback
+     */
+    public function validateRange ( ExecutionContextInterface $context )
+    {
+        //Validate startSeconds: [0; duration[
+        if ( $this->getStartSeconds() >= $this->getVideo()->getDuration() ) {
+            $context->addViolationAt(
+                'startSeconds',
+                'The extract must start before the end of the video (starts at %start%).',
+                [ '%start%' => $this->getStartSeconds() ],
+                $this->getStartSeconds()
+            );
+        }
+        
+        //Validate endSeconds: ]start; duration]
+        if ( $this->getEndSeconds() <= $this->getStartSeconds() ) {
+            $context->addViolationAt(
+                'endSeconds',
+                'The extract must end after starting (ends at %end%).',
+                [ '%end%' => $this->getEndSeconds() ],
+                $this->getEndSeconds()
+            );
+        }
+        if ( $this->getEndSeconds() > $this->getVideo()->getDuration() ) {
+            $context->addViolationAt(
+                'endSeconds',
+                'The extract must end before or at the same time as the video (ends at %end%).',
+                [ '%end%' => $this->getEndSeconds() ],
+                $this->getEndSeconds()
+            );
+        }
+    }
     
 
 
