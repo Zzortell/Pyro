@@ -12,7 +12,6 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  *
  * @ORM\Table("zz_pyro_video")
  * @ORM\Entity(repositoryClass="Zz\PyroBundle\Entity\VideoRepository")
- * @Constraints\VideoUnique
  */
 class Video
 {

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Zz\PyroBundle\Entity\Video;
 use Zz\PyroBundle\Form\VideoType;
+use Symfony\Component\Form\FormError;
 
 class VideoController extends Controller
 {
@@ -22,8 +23,18 @@ class VideoController extends Controller
 		
 		$form->handleRequest($request);
 		
+		$em = $this->getDoctrine()->getManager();
+		
 		if ( $form->isValid() ) {
-			$em = $this->getDoctrine()->getManager();
+			//Check the video is not already in the database
+			if ( $em->getRepository('ZzPyroBundle:Video')->isStored($video) ) {
+				$form->addError(new FormError (
+					'The video ' . $video->getId() . ' already exists.'
+				));
+			}
+		}
+		
+		if ( $form->isValid() ) {
 			$em->persist($video);
 			$em->flush();
 
