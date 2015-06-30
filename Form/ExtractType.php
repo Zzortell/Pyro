@@ -8,6 +8,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ExtractType extends AbstractType
 {
+	protected $typeFactory;
+	
+	public function __construct ( TypeFactory $typeFactory )
+	{
+		$this->typeFactory = $typeFactory;
+	}
+	
 	/**
 	 * @param FormBuilderInterface $builder
 	 * @param array $options
@@ -20,7 +27,8 @@ class ExtractType extends AbstractType
 				'property' 	=> 'title',
 				'multiple' 	=> false
 			])
-			->add('newVideo', 		new VideoAddType, [ 'mapped' => false ])
+			->add('newVideo', 		$this->typeFactory->createVideoType(),
+										[ 'mapped' => false ])
 			->add('startSeconds', 	'integer')
 			->add('endSeconds', 	'integer')
 			->add('save', 			'submit')

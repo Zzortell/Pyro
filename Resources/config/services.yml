@@ -6,8 +6,8 @@ services:
         class: Zz\PyroBundle\Entity\VideoYtFactory
         arguments: [%yt_data_api.dev_key%]
 
-    zz_pyro.video_type_factory:
-        class: Zz\PyroBundle\Form\VideoTypeFactory
+    zz_pyro.type_factory:
+        class: Zz\PyroBundle\Form\TypeFactory
         arguments: [@zz_pyro.video_yt_factory]
 
     zz_pyro.video_unique_validator:
