@@ -11,7 +11,9 @@
     ],
     
 	"require": {
-        "zzortell/zz-core-bundle": "~1.1"
+        "zzortell/zz-core-bundle": "~1.1",
+        "zzortell/zz-user-bundle": "*",
+        "google/apiclient": "~1.1",
     },
 	
     "autoload": {

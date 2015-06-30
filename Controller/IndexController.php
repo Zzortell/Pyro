@@ -3,6 +3,8 @@
 namespace Zz\PyroBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Zz\PyroBundle\Entity\Extract;
+use Zz\PyroBundle\Form\ExtractType;
 
 class IndexController extends Controller
 {

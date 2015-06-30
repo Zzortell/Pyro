@@ -60,6 +60,8 @@
 					<section id="user_register_container"
 							 path="{{ path('fos_user_registration_register') }}">
 					</section>
+				{% else %}
+					{{ render(controller('ZzPyroBundle:Extract:add')) }}
 				{% endif %}
 			</section>
 			<div class="after"></div>

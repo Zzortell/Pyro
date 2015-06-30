@@ -1,4 +1,17 @@
 services:
-#    zz_pyro.example:
-#        class: Zz\PyroBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    zz_pyro.profile_manager:
+        class: Zz\PyroBundle\Entity\ProfileManager
+        arguments: [@security.context, @doctrine.orm.entity_manager]
+    zz_pyro.video_yt_factory:
+        class: Zz\PyroBundle\Entity\VideoYtFactory
+        arguments: [%yt_data_api.dev_key%]
+
+    zz_pyro.video_type_factory:
+        class: Zz\PyroBundle\Form\VideoTypeFactory
+        arguments: [@zz_pyro.video_yt_factory]
+
+    zz_pyro.video_unique_validator:
+        class: Zz\PyroBundle\Constraints\VideoUniqueValidator
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: validator.constraint_validator, alias: video_unique }
