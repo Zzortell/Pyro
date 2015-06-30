@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Zz\PyroBundle\Entity\VideoYtFactory;
+use Symfony\Component\Form\FormError;
 
 class VideoType extends AbstractType
 {
@@ -33,9 +34,14 @@ class VideoType extends AbstractType
     public function onSubmit ( FormEvent $e )
     {
         $video = $e->getData();
+        $form = $e->getForm();
         
         if ( $video->getId() ) {
-            $this->factory->hydrateVideo($video);
+            if ( !$this->factory->hydrateVideo($video) ) {
+                $form->addError(new FormError (
+                    'The video ' . $video->getId() . ' doesn\'t exist.'
+                ));
+            }
         }
     }
     

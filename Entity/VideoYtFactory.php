@@ -23,11 +23,17 @@ class VideoYtFactory
 			'id' => $video->getId()
 		]);
 		
+		if ( $response->count() === 0 ) {
+			return false;
+		}
+		
 		$video
 			->setPublishedAt(new \DateTime ($response[0]['snippet']['publishedAt']))
 			->setTitle($response[0]['snippet']['title'])
 			->setThumbnail($response[0]['snippet']['thumbnails']['default']['url'])
 			->setDuration($response[0]['contentDetails']['duration'])
 		;
+		
+		return true;
 	}
 }

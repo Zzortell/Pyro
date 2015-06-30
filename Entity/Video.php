@@ -30,7 +30,6 @@ class Video
      *
      * @ORM\Column(name="publishedAt", type="datetime")
      * @Assert\DateTime
-     * @Assert\NotBlank
      */
     private $publishedAt;
 
@@ -39,7 +38,6 @@ class Video
      *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\Type("string")
-     * @Assert\NotBlank
      */
     private $title;
 
@@ -48,7 +46,6 @@ class Video
      *
      * @ORM\Column(name="thumbnail", type="string", length=255)
      * @Assert\Url
-     * @Assert\NotBlank
      */
     private $thumbnail;
 
@@ -57,7 +54,6 @@ class Video
      *
      * @ORM\Column(name="duration", type="string")
      * @Assert\Regex("#^P(?:\d+[YDM])*(?:T(?:\d+[HMS])*)$#")
-     * @Assert\NotBlank
      */
     private $duration;
 
