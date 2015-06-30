@@ -27,7 +27,7 @@ class VideoYtFactory
 			->setPublishedAt(new \DateTime ($response[0]['snippet']['publishedAt']))
 			->setTitle($response[0]['snippet']['title'])
 			->setThumbnail($response[0]['snippet']['thumbnails']['default']['url'])
-			->setDuration(new \DateInterval ($response[0]['contentDetails']['duration']))
+			->setDuration($response[0]['contentDetails']['duration'])
 		;
 	}
 }

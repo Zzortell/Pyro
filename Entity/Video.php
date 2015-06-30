@@ -31,7 +31,7 @@ class Video
      *
      * @ORM\Column(name="publishedAt", type="datetime")
      * @Assert\DateTime
-     * @Assert\NotBlank(message="Valeur vide: {{ value }}")
+     * @Assert\NotBlank
      */
     private $publishedAt;
 
@@ -40,7 +40,7 @@ class Video
      *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\Type("string")
-     * @Assert\NotBlank(message="Valeur vide: {{ value }}")
+     * @Assert\NotBlank
      */
     private $title;
 
@@ -49,16 +49,16 @@ class Video
      *
      * @ORM\Column(name="thumbnail", type="string", length=255)
      * @Assert\Url
-     * @Assert\NotBlank(message="Valeur vide: {{ value }}")
+     * @Assert\NotBlank
      */
     private $thumbnail;
 
     /**
      * @var \DateInterval
      *
-     * @ORM\Column(name="duration", type="datetime")
-     * @Constraints\Duration
-     * @Assert\NotBlank(message="Valeur vide: {{ value }}")
+     * @ORM\Column(name="duration", type="string")
+     * @Assert\Regex("#^P(?:\d+[YDM])*(?:T(?:\d+[HMS])*)$#")
+     * @Assert\NotBlank
      */
     private $duration;
 
@@ -153,11 +153,11 @@ class Video
     /**
      * Set duration
      *
-     * @param \DateInterval $duration
+     * @param string $duration
      *
      * @return Video
      */
-    public function setDuration(\DateInterval $duration)
+    public function setDuration( $duration)
     {
         $this->duration = $duration;
 
@@ -167,7 +167,7 @@ class Video
     /**
      * Get duration
      *
-     * @return \DateInterval
+     * @return string
      */
     public function getDuration()
     {
