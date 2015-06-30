@@ -2,13 +2,14 @@ services:
     zz_pyro.profile_manager:
         class: Zz\PyroBundle\Entity\ProfileManager
         arguments: [@security.context, @doctrine.orm.entity_manager]
+
     zz_pyro.youtube_requestor:
         class: Zz\PyroBundle\Entity\YoutubeRequestor
         arguments: [%yt_data_api.dev_key%]
 
     zz_pyro.type_factory:
         class: Zz\PyroBundle\Form\TypeFactory
-        arguments: [@zz_pyro.youtube_requestor]
+        arguments: [@doctrine.orm.entity_manager, @zz_pyro.youtube_requestor]
 
     zz_pyro.video_unique_validator:
         class: Zz\PyroBundle\Constraints\VideoUniqueValidator

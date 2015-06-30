@@ -6,13 +6,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Zz\PyroBundle\Entity\YoutubeRequestor;
+use Doctrine\ORM\EntityManager;
 
 class VideoAddType extends AbstractType
 {
+    protected $em;
     protected $ytRequestor;
     
-    public function __construct ( YoutubeRequestor $ytRequestor )
+    public function __construct ( EntityManager $em, YoutubeRequestor $ytRequestor )
     {
+        $this->em = $em;
         $this->ytRequestor = $ytRequestor;
     }
     
@@ -26,6 +29,16 @@ class VideoAddType extends AbstractType
             ->add('save', 'submit')
         ;
     }
+    
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'force_new' => true
+        ));
+    }
 
     /**
      * @return string
@@ -37,6 +50,6 @@ class VideoAddType extends AbstractType
     
     public function getParent ()
     {
-        return new VideoType ($this->ytRequestor);
+        return new VideoType ($this->em, $this->ytRequestor);
     }
 }

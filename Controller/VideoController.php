@@ -23,18 +23,8 @@ class VideoController extends Controller
 		
 		$form->handleRequest($request);
 		
-		$em = $this->getDoctrine()->getManager();
-		
 		if ( $form->isValid() ) {
-			//Check the video is not already in the database
-			if ( $em->getRepository('ZzPyroBundle:Video')->isStored($video) ) {
-				$form->addError(new FormError (
-					'The video ' . $video->getId() . ' already exists.'
-				));
-			}
-		}
-		
-		if ( $form->isValid() ) {
+			$em = $this->getDoctrine()->getManager();
 			$em->persist($video);
 			$em->flush();
 

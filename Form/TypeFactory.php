@@ -2,25 +2,28 @@
 
 namespace Zz\PyroBundle\Form;
 
+use Doctrine\ORM\EntityManager;
 use Zz\PyroBundle\Entity\YoutubeRequestor;
 
 class TypeFactory
 {
-	protected $ytRequestor;
+    protected $em;
+    protected $ytRequestor;
     
-    public function __construct ( YoutubeRequestor $ytRequestor )
+    public function __construct ( EntityManager $em, YoutubeRequestor $ytRequestor )
     {
+        $this->em = $em;
         $this->ytRequestor = $ytRequestor;
     }
     
     public function createVideoType ()
     {
-    	return new VideoType ($this->ytRequestor);
+    	return new VideoType ($this->em, $this->ytRequestor);
     }
     
     public function createVideoAddType ()
     {
-    	return new VideoAddType ($this->ytRequestor);
+    	return new VideoAddType ($this->em, $this->ytRequestor);
     }
     
     public function createExtractType ()

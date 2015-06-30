@@ -9,13 +9,17 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Zz\PyroBundle\Entity\YoutubeRequestor;
 use Symfony\Component\Form\FormError;
+use Doctrine\ORM\EntityManager;
 
 class VideoType extends AbstractType
 {
+    protected $em;
     protected $ytRequestor;
     
-    public function __construct ( YoutubeRequestor $ytRequestor )
-    {
+    public function __construct (
+        EntityManager $em, YoutubeRequestor $ytRequestor
+    ) {
+        $this->em = $em;
         $this->ytRequestor = $ytRequestor;
     }
     
@@ -37,7 +41,20 @@ class VideoType extends AbstractType
         $form = $e->getForm();
         
         if ( $video->getId() ) {
-            if ( !$this->ytRequestor->hydrateVideo($video) ) {
+            $repo = $this->em->getRepository('ZzPyroBundle:Video');
+            //Check the video is not already in the database
+            if ( $repo->isStored($video) ) {
+                // Force the video to be new depending on the config
+                if ( $form->getConfig()->getOption('force_new') ) {
+                    $form->addError(new FormError (
+                        'The video ' . $video->getId() . ' already exists.'
+                    ));
+                } else {
+                    $e->setData($repo->findOneById($video->getId()));
+                }
+            }
+            // Else check if the video exists and hydrate it
+            elseif ( !$this->ytRequestor->hydrateVideo($video) ) {
                 $form->addError(new FormError (
                     'The video ' . $video->getId() . ' doesn\'t exist.'
                 ));
@@ -51,7 +68,8 @@ class VideoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Zz\PyroBundle\Entity\Video'
+            'data_class' => 'Zz\PyroBundle\Entity\Video',
+            'force_new' => false
         ));
     }
 

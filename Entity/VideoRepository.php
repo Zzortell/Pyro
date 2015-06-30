@@ -7,13 +7,8 @@ namespace Zz\PyroBundle\Entity;
  */
 class VideoRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function isStored ( $video )
+	public function isStored ( Video $video )
 	{
-		return !empty($this->createQueryBuilder('v')
-			->where('v.id = :id')
-				->setParameter('id', $video->getId())
-			->getQuery()
-			->getResult()
-		);
+		return !empty($this->findById($video->getId()));
 	}
 }
