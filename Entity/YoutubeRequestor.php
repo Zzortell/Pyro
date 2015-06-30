@@ -5,7 +5,7 @@ namespace Zz\PyroBundle\Entity;
 use Google_Client;
 use Google_Service_YouTube;
 
-class VideoYtFactory
+class YoutubeRequestor
 {
 	protected $yt;
 	

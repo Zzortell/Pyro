@@ -5,15 +5,15 @@ namespace Zz\PyroBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Zz\PyroBundle\Entity\VideoYtFactory;
+use Zz\PyroBundle\Entity\YoutubeRequestor;
 
 class VideoAddType extends AbstractType
 {
-    protected $factory;
+    protected $ytRequestor;
     
-    public function __construct ( VideoYtFactory $factory )
+    public function __construct ( YoutubeRequestor $ytRequestor )
     {
-        $this->factory = $factory;
+        $this->ytRequestor = $ytRequestor;
     }
     
     /**
@@ -37,6 +37,6 @@ class VideoAddType extends AbstractType
     
     public function getParent ()
     {
-        return new VideoType ($this->factory);
+        return new VideoType ($this->ytRequestor);
     }
 }

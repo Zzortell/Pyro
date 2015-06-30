@@ -7,16 +7,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Zz\PyroBundle\Entity\VideoYtFactory;
+use Zz\PyroBundle\Entity\YoutubeRequestor;
 use Symfony\Component\Form\FormError;
 
 class VideoType extends AbstractType
 {
-    protected $factory;
+    protected $ytRequestor;
     
-    public function __construct ( VideoYtFactory $factory )
+    public function __construct ( YoutubeRequestor $ytRequestor )
     {
-        $this->factory = $factory;
+        $this->ytRequestor = $ytRequestor;
     }
     
     /**
@@ -37,7 +37,7 @@ class VideoType extends AbstractType
         $form = $e->getForm();
         
         if ( $video->getId() ) {
-            if ( !$this->factory->hydrateVideo($video) ) {
+            if ( !$this->ytRequestor->hydrateVideo($video) ) {
                 $form->addError(new FormError (
                     'The video ' . $video->getId() . ' doesn\'t exist.'
                 ));

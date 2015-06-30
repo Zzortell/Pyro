@@ -2,25 +2,25 @@
 
 namespace Zz\PyroBundle\Form;
 
-use Zz\PyroBundle\Entity\VideoYtFactory;
+use Zz\PyroBundle\Entity\YoutubeRequestor;
 
 class TypeFactory
 {
-	protected $ytFactory;
+	protected $ytRequestor;
     
-    public function __construct ( VideoYtFactory $ytFactory )
+    public function __construct ( YoutubeRequestor $ytRequestor )
     {
-        $this->ytFactory = $ytFactory;
+        $this->ytRequestor = $ytRequestor;
     }
     
     public function createVideoType ()
     {
-    	return new VideoType ($this->ytFactory);
+    	return new VideoType ($this->ytRequestor);
     }
     
     public function createVideoAddType ()
     {
-    	return new VideoAddType ($this->ytFactory);
+    	return new VideoAddType ($this->ytRequestor);
     }
     
     public function createExtractType ()
