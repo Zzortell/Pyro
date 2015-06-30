@@ -10,9 +10,3 @@ services:
     zz_pyro.type_factory:
         class: Zz\PyroBundle\Form\TypeFactory
         arguments: [@doctrine.orm.entity_manager, @zz_pyro.youtube_requestor]
-
-    zz_pyro.video_unique_validator:
-        class: Zz\PyroBundle\Constraints\VideoUniqueValidator
-        arguments: [@doctrine.orm.entity_manager]
-        tags:
-            - { name: validator.constraint_validator, alias: video_unique }
