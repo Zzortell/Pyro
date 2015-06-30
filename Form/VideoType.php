@@ -25,8 +25,7 @@ class VideoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id',     'text')
-            ->add('save',   'submit')
+            ->add('id', 'text')
             ->addEventListener( FormEvents::SUBMIT, [ $this, 'onSubmit' ] )
         ;
     }

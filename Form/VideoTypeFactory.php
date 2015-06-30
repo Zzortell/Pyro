@@ -15,6 +15,6 @@ class VideoTypeFactory
     
     public function create ()
     {
-    	return new VideoType ($this->factory);
+    	return new VideoAddType ($this->factory);
     }
 }

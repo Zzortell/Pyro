@@ -5,9 +5,17 @@ namespace Zz\PyroBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Zz\PyroBundle\Entity\VideoYtFactory;
 
 class VideoAddType extends AbstractType
 {
+    protected $factory;
+    
+    public function __construct ( VideoYtFactory $factory )
+    {
+        $this->factory = $factory;
+    }
+    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -15,7 +23,7 @@ class VideoAddType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('save',   'submit')
+            ->add('save', 'submit')
         ;
     }
 
@@ -29,6 +37,6 @@ class VideoAddType extends AbstractType
     
     public function getParent ()
     {
-        return new VideoType;
+        return new VideoType ($this->factory);
     }
 }
