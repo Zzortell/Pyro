@@ -50,10 +50,10 @@ class Video
     private $thumbnail;
 
     /**
-     * @var \DateInterval
+     * @var string
      *
      * @ORM\Column(name="duration", type="string")
-     * @Assert\Regex("#^P(?:\d+[YDM])*(?:T(?:\d+[HMS])*)$#")
+     * @Assert\Regex("#^P(?:\d+[D])*(?:T(?:\d+[HMS])*)$#")
      */
     private $duration;
 

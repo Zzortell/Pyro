@@ -60,8 +60,12 @@ class Extract
      */
     public function validateRange ( ExecutionContextInterface $context )
     {
+        $durationInterval = new \DateInterval ($this->getVideo()->getDuration());
+        $durationSeconds = $durationInterval->days*86400 + $durationInterval->h*3600
+                            + $durationInterval->i*60 + $durationInterval->s;
+        
         //Validate startSeconds: [0; duration[
-        if ( $this->getStartSeconds() >= $this->getVideo()->getDuration() ) {
+        if ( $this->getStartSeconds() >= $durationSeconds ) {
             $context->addViolationAt(
                 'startSeconds',
                 'The extract must start before the end of the video (starts at %start%).',
@@ -79,7 +83,7 @@ class Extract
                 $this->getEndSeconds()
             );
         }
-        if ( $this->getEndSeconds() > $this->getVideo()->getDuration() ) {
+        if ( $this->getEndSeconds() > $durationSeconds ) {
             $context->addViolationAt(
                 'endSeconds',
                 'The extract must end before or at the same time as the video (ends at %end%).',
