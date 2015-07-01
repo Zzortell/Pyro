@@ -11,3 +11,8 @@
 	{% endstylesheets %} #}
 </head>
 {% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/zzpyro/js/extract_type.js') }}"></script>
+{% endblock %}
