@@ -60,7 +60,7 @@ class Extract
      */
     public function validateRange ( ExecutionContextInterface $context )
     {
-        if ( !$this->getVideo() ) {
+        if ( !$this->getVideo() || !$this->getVideo()->getDuration() ) {
             return;
         }
         
