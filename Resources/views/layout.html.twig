@@ -12,6 +12,11 @@
 </head>
 {% endblock %}
 
+{% block js_lib %}
+	{{ parent() }}
+	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+{% endblock %}
+
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('bundles/zzpyro/js/extract_type.js') }}"></script>

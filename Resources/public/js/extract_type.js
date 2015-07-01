@@ -2,7 +2,9 @@ jQuery(function($){
 	var videoSelect 			= $('#zz_pyrobundle_extract_video'),
 		externalVideoIdInput 	= $('#zz_pyrobundle_extract_externalVideo_id');
 	
-	videoSelect.on('change', function ( e ) {
+	videoSelect.attr('required', true);
+	
+	videoSelect.on('change', function () {
 		console.log($(this).val());
 		if ( $(this).val() !== '' ) {
 			externalVideoIdInput.val('');
@@ -19,6 +21,8 @@ jQuery(function($){
 		} else {
 			videoSelect.attr('disabled', false);
 		}
-		
 	});
+	
+	videoSelect.trigger('change');
+	externalVideoIdInput.trigger('input');
 });
