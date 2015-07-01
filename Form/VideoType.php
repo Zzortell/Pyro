@@ -40,7 +40,7 @@ class VideoType extends AbstractType
         $video = $e->getData();
         $form = $e->getForm();
         
-        if ( $video->getId() ) {
+        if ( $video && $video->getId() ) {
             $repo = $this->em->getRepository('ZzPyroBundle:Video');
             //Check the video is not already in the database
             if ( $repo->isStored($video) ) {

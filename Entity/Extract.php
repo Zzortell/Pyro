@@ -60,6 +60,10 @@ class Extract
      */
     public function validateRange ( ExecutionContextInterface $context )
     {
+        if ( !$this->getVideo() ) {
+            return;
+        }
+        
         $durationInterval = new \DateInterval ($this->getVideo()->getDuration());
         $durationSeconds = $durationInterval->days*86400 + $durationInterval->h*3600
                             + $durationInterval->i*60 + $durationInterval->s;
