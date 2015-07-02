@@ -45,7 +45,8 @@ class BestOf
     /**
      * @var array
      *
-     * @ORM\Column(name="channels", type="array")
+     * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Channel")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $channels;
 
@@ -168,17 +169,27 @@ class BestOf
     }
 
     /**
-     * Set channels
+     * Add channel
      *
-     * @param array $channels
+     * @param \Zz\PyroBundle\Entity\Channel $channel
      *
      * @return BestOf
      */
-    public function setChannels($channels)
+    public function addChannel(\Zz\PyroBundle\Entity\Channel $channel)
     {
-        $this->channels = $channels;
+        $this->channels[] = $channel;
 
         return $this;
+    }
+
+    /**
+     * Remove channel
+     *
+     * @param \Zz\PyroBundle\Entity\Channel $channel
+     */
+    public function removeChannel(\Zz\PyroBundle\Entity\Channel $channel)
+    {
+        $this->channels->removeElement($channel);
     }
 
     /**
