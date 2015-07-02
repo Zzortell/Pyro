@@ -30,7 +30,7 @@ class ChannelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'text')
+            ->add('idOrUser', 'text', [ 'mapped' => false ])
             ->addEventListener( FormEvents::SUBMIT, [ $this, 'onSubmit' ] )
         ;
     }
@@ -40,17 +40,32 @@ class ChannelType extends AbstractType
         $channel = $e->getData();
         $form = $e->getForm();
         
-        if ( $channel && $channel->getId() ) {
-            $repo = $this->em->getRepository('ZzPyroBundle:Channel');
+        $idOrUser = $form->get('idOrUser')->getData();
+        
+        if ( !($channel && $idOrUser) ) {
+            return;
+        }
+        
+        $repo = $this->em->getRepository('ZzPyroBundle:Channel');
+        
+        if ( strpos($idOrUser, 'user:') === 0 ) {
+            $channel->setUsername(substr($idOrUser, 5));
             
-            if ( $repo->isStored($channel) ) {
-                $e->setData($repo->findOneById($channel->getId()));
-                
-            } elseif ( !$this->ytRequestor->hydrateChannel($channel) ) {
+            if ( !$this->ytRequestor->hydrateChannel($channel) ) {
                 $form->addError(new FormError (
-                    'The channel ' . $channel->getId() . ' doesn\'t exist.'
+                    'The channel from the user ' . $channel->getUsername() . ' doesn\'t exist.'
                 ));
             }
+        } else {
+            $channel->setId($idOrUser);
+        }
+        if ( $repo->isStored($channel) ) {
+            $e->setData($repo->findOneById($channel->getId()));
+            
+        } elseif ( !$channel->getUsername() && !$this->ytRequestor->hydrateChannel($channel) ) {
+            $form->addError(new FormError (
+                'The channel ' . $channel->getId() . ' doesn\'t exist.'
+            ));
         }
     }
     

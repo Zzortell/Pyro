@@ -40,9 +40,16 @@ class YoutubeRequestor
 	
 	public function hydrateChannel ( $channel )
 	{
+		if ( $channel->getId() ) {
+			$filters = [ 'id' => $channel->getId() ];
+		} elseif ( $channel->getUsername() ) {
+			$filters = [ 'forUsername' => $channel->getUsername() ];
+		} else {
+			throw new \InvalidArgumentException('The given channel has no id nor username');
+		}
+		
 		$response = $this->yt->channels->listChannels(
-			'id, snippet, brandingSettings',
-			[ 'id' => $channel->getId() ]
+			'id, snippet, brandingSettings', $filters
 		);
 		
 		if ( $response->count() === 0 ) {
@@ -50,10 +57,13 @@ class YoutubeRequestor
 		}
 		
 		$channel
+			->setId($response[0]['id'])
 			->setTitle($response[0]['snippet']['title'])
 			->setThumbnail($response[0]['snippet']['thumbnails']['default']['url'])
 			->setBanner($response[0]['brandingSettings']['image']['bannerImageUrl'])
 		;
+		
+		dump($channel);
 		
 		return true;
 	}

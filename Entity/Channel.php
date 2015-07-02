@@ -23,6 +23,8 @@ class Channel
      */
     protected $id;
     
+    protected $username;
+    
     /**
      * @ORM\Column(type="string")
      * @Assert\Type("string")
@@ -40,7 +42,7 @@ class Channel
     /**
      * @ORM\Column(type="string")
      * @Assert\Url
-     * @Assert\NotNull
+     * @Assert\NotNull(message="r")
      */
     protected $banner;
 
@@ -58,6 +60,18 @@ class Channel
     public function setId( $id )
     {
         $this->id = $id;
+        
+        return $this;
+    }
+    
+    public function getUsername()
+    {
+        return $this->username;
+    }
+    
+    public function setUsername( $username )
+    {
+        $this->username = $username;
         
         return $this;
     }
