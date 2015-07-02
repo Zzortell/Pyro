@@ -53,7 +53,7 @@ class BestOf
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Channel")
+     * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Channel", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Valid
      * @Assert\NotNull

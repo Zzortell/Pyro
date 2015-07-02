@@ -33,6 +33,11 @@ class TypeFactory
     
     public function createBestOfType ()
     {
-    	return new BestOfType ($this);
+        return new BestOfType ($this);
+    }
+    
+    public function createChannelType ()
+    {
+    	return new ChannelType ($this->em, $this->ytRequestor);
     }
 }

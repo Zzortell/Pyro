@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Channel
  *
  * @ORM\Table("zz_pyro_channel")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ChannelRepository")
  */
 class Channel
 {
@@ -21,7 +21,28 @@ class Channel
      * @Assert\Type("string")
      * @Assert\NotBlank
      */
-    private $id;
+    protected $id;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Type("string")
+     * @Assert\NotNull
+     */
+    protected $title;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Url
+     * @Assert\NotNull
+     */
+    protected $thumbnail;
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Url
+     * @Assert\NotNull
+     */
+    protected $banner;
 
 
     /**
@@ -39,5 +60,77 @@ class Channel
         $this->id = $id;
         
         return $this;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Channel
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param string $thumbnail
+     *
+     * @return Channel
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnail
+     *
+     * @return string
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * Set banner
+     *
+     * @param string $banner
+     *
+     * @return Channel
+     */
+    public function setBanner($banner)
+    {
+        $this->banner = $banner;
+
+        return $this;
+    }
+
+    /**
+     * Get banner
+     *
+     * @return string
+     */
+    public function getBanner()
+    {
+        return $this->banner;
     }
 }

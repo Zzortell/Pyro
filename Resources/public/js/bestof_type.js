@@ -12,7 +12,7 @@ jQuery(function($){
 	addButton.on('click', addChannel);
 	
 	// Compteur de champs
-	var index = channels.find(':input').length;
+	var index = channels.find('input').length;
 	
 	// Ajout d'un premier champs
 	if ( index === 0 ) {

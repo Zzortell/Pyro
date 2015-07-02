@@ -24,7 +24,7 @@ class BestOfType extends AbstractType
         $builder
             ->add('name',       'text')
             ->add('channels',   'collection', [
-                'type'          => new ChannelType,
+                'type'          => $this->typeFactory->createChannelType(),
                 'allow_add'     => true,
                 'allow_delete'  => true
             ])
