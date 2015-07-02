@@ -5,6 +5,7 @@ namespace Zz\PyroBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * BestOf
@@ -37,13 +38,15 @@ class BestOf
      * @var \DateTime
      *
      * @ORM\Column(name="proposal_date", type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $proposalDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_date", type="datetime")
+     * @ORM\Column(name="end_date", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="change", field="done", value=true)
      */
     private $endDate;
 
@@ -77,7 +80,7 @@ class BestOf
      * @Assert\Type("boolean")
      * @Assert\NotNull
      */
-    private $done;
+    private $done = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="Zz\PyroBundle\Entity\Video")
