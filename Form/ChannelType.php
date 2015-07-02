@@ -15,7 +15,7 @@ class ChannelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id')
+            ->add('id', 'text')
         ;
     }
     
