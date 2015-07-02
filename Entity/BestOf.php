@@ -3,6 +3,8 @@
 namespace Zz\PyroBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * BestOf
@@ -25,6 +27,9 @@ class BestOf
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Type("string")
+     * @Assert\Length(max=255)
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -47,12 +52,15 @@ class BestOf
      *
      * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Channel")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid
+     * @Assert\NotNull
      */
     private $channels;
 
     /**
      * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Video")
      * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid
      */
     private $videos;
 
@@ -66,16 +74,31 @@ class BestOf
      * @var boolean
      *
      * @ORM\Column(name="done", type="boolean")
+     * @Assert\Type("boolean")
+     * @Assert\NotNull
      */
     private $done;
 
     /**
      * @ORM\ManyToOne(targetEntity="Zz\PyroBundle\Entity\Video")
      * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid
      * TODO: with done
      */
     private $video;
-
+    
+    /**
+     * @Assert\Callback
+     */
+    public function validateVideo ( ExecutionContextInterface $context )
+    {
+        if ( $this->done && !$this->video ) {
+            $context->addViolationAt(
+                'done',
+                'A done BestOf must be linked to a video.'
+            );
+        }
+    }
 
     
     /**
@@ -84,6 +107,7 @@ class BestOf
     public function __construct()
     {
         $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->channels = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -217,11 +241,11 @@ class BestOf
     }
 
     /**
-     * Get done
+     * Is done
      *
      * @return boolean
      */
-    public function getDone()
+    public function isDone()
     {
         return $this->done;
     }

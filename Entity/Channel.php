@@ -3,6 +3,7 @@
 namespace Zz\PyroBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Channel
@@ -17,6 +18,8 @@ class Channel
      *
      * @ORM\Column(name="id", type="string")
      * @ORM\Id
+     * @Assert\Type("string")
+     * @Assert\NotBlank
      */
     private $id;
 
