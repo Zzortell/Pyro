@@ -28,7 +28,7 @@ class Video
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="publishedAt", type="datetime")
+     * @ORM\Column(name="published_at", type="datetime")
      * @Assert\DateTime
      */
     private $publishedAt;

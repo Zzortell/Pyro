@@ -1,0 +1,114 @@
+<?php
+
+namespace Zz\PyroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * BestOf
+ *
+ * @ORM\Table("zz_pyro_bestof")
+ * @ORM\Entity
+ */
+class BestOf
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="proposal_date", type="datetime")
+     */
+    private $proposalDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_date", type="datetime")
+     */
+    private $endDate;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="channels", type="array")
+     */
+    private $channels;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Video")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $videos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Zz\PyroBundle\Entity\Profile")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $manager;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="done", type="boolean")
+     */
+    private $done;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Zz\PyroBundle\Entity\Video")
+     * @ORM\JoinColumn(nullable=true)
+     * TODO: with done
+     */
+    private $video;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return BestOf
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    
+}
