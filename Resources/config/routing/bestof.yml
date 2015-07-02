@@ -1,0 +1,3 @@
+zz_pyro_bestof_add:
+    path:     /add
+    defaults: { _controller: ZzPyroBundle:BestOf:add }

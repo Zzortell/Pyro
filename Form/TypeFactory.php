@@ -28,6 +28,11 @@ class TypeFactory
     
     public function createExtractType ()
     {
-    	return new ExtractType ($this);
+        return new ExtractType ($this);
+    }
+    
+    public function createBestOfType ()
+    {
+    	return new BestOfType ($this);
     }
 }

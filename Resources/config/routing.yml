@@ -9,3 +9,7 @@ zz_pyro_extract:
 zz_pyro_video:
     resource: "@ZzPyroBundle/Resources/config/routing/video.yml"
     prefix:   /video
+
+zz_pyro_bestof:
+    resource: "@ZzPyroBundle/Resources/config/routing/bestof.yml"
+    prefix:   /bestof
