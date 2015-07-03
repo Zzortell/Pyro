@@ -7,19 +7,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Zz\PyroBundle\Entity\YoutubeRequestor;
 use Symfony\Component\Form\FormError;
-use Doctrine\ORM\EntityManager;
+use Zz\PyroBundle\Entity\YoutubeRequestor;
+use Zz\PyroBundle\Entity\ChannelRepository;
 
 class ChannelType extends AbstractType
 {
-    protected $em;
+    protected $repo;
     protected $ytRequestor;
     
     public function __construct (
-        EntityManager $em, YoutubeRequestor $ytRequestor
+        ChannelRepository $repo, YoutubeRequestor $ytRequestor
     ) {
-        $this->em = $em;
+        $this->repo = $repo;
         $this->ytRequestor = $ytRequestor;
     }
     
@@ -46,8 +46,6 @@ class ChannelType extends AbstractType
             return;
         }
         
-        $repo = $this->em->getRepository('ZzPyroBundle:Channel');
-        
         if ( strpos($idOrUser, 'user:') === 0 ) {
             $username = substr($idOrUser, 5);
             $e->setData($channel = $this->ytRequestor->resolveChannel($username));
@@ -61,8 +59,8 @@ class ChannelType extends AbstractType
             $channel->setId($idOrUser);
         }
         
-        if ( $repo->isStored($channel) ) {
-            $e->setData($repo->findOneById($channel->getId()));
+        if ( $this->repo->isStored($channel) ) {
+            $e->setData($this->repo->findOneById($channel->getId()));
             
         } elseif ( !$this->ytRequestor->hydrateChannel($channel) ) {
             $form->addError(new FormError (

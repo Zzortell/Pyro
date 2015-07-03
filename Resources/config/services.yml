@@ -9,7 +9,7 @@ services:
 
     zz_pyro.form.video:
         class: Zz\PyroBundle\Form\VideoType
-        arguments: [@doctrine.orm.entity_manager, @zz_pyro.youtube_requestor]
+        arguments: [@zz_pyro.repo.video, @zz_pyro.youtube_requestor]
         tags:
             - { name: form.type, alias: video }
 
@@ -20,7 +20,7 @@ services:
 
     zz_pyro.form.channel:
         class: Zz\PyroBundle\Form\ChannelType
-        arguments: [@doctrine.orm.entity_manager, @zz_pyro.youtube_requestor]
+        arguments: [@zz_pyro.repo.channel, @zz_pyro.youtube_requestor]
         tags:
             - { name: form.type, alias: channel }
 
@@ -33,3 +33,15 @@ services:
         class: Zz\PyroBundle\Form\BestOfType
         tags:
             - { name: form.type, alias: bestof }
+
+    zz_pyro.repo.channel:
+        class: Zz\PyroBundle\Entity\ChannelRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['ZzPyroBundle:Channel']
+
+    zz_pyro.repo.video:
+        class: Zz\PyroBundle\Entity\VideoRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['ZzPyroBundle:Video']

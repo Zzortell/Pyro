@@ -7,19 +7,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Zz\PyroBundle\Entity\YoutubeRequestor;
 use Symfony\Component\Form\FormError;
-use Doctrine\ORM\EntityManager;
+use Zz\PyroBundle\Entity\YoutubeRequestor;
+use Zz\PyroBundle\Entity\VideoRepository;
 
 class VideoType extends AbstractType
 {
-    protected $em;
+    protected $repo;
     protected $ytRequestor;
     
     public function __construct (
-        EntityManager $em, YoutubeRequestor $ytRequestor
+        VideoRepository $repo, YoutubeRequestor $ytRequestor
     ) {
-        $this->em = $em;
+        $this->repo = $repo;
         $this->ytRequestor = $ytRequestor;
     }
     
@@ -41,16 +41,15 @@ class VideoType extends AbstractType
         $form = $e->getForm();
         
         if ( $video && $video->getId() ) {
-            $repo = $this->em->getRepository('ZzPyroBundle:Video');
             //Check the video is not already in the database
-            if ( $repo->isStored($video) ) {
+            if ( $this->repo->isStored($video) ) {
                 // Force the video to be new depending on the config
                 if ( $form->getConfig()->getOption('force_new') ) {
                     $form->addError(new FormError (
                         'The video ' . $video->getId() . ' already exists.'
                     ));
                 } else {
-                    $e->setData($repo->findOneById($video->getId()));
+                    $e->setData($this->repo->findOneById($video->getId()));
                 }
             }
             // Else check if the video exists and hydrate it
