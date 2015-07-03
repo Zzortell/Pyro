@@ -36,7 +36,8 @@ class BestOfType extends AbstractType
             ])
             ->add('externalVideos', 'collection', [
                 'type'      => $this->typeFactory->createVideoType(),
-                'options'   => [ 'mapped' => false, 'required' => false ],
+                'allow_add'     => true,
+                'allow_delete'  => true,
                 'mapped'    => false
             ])
             ->add('save',       'submit')

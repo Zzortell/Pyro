@@ -1,40 +1,49 @@
 jQuery(function($){
-	var form 		= $('[name="zz_pyrobundle_bestof"]'),
-		channels 	= $('#zz_pyrobundle_bestof_channels')
-	;
+	var collections = [
+		$('#zz_pyrobundle_bestof_channels'),
+		$('#zz_pyrobundle_bestof_externalVideos')
+	];
 	
-	var addButton = $('<button type="button" id="add_channel">Ajouter une chaîne</button>'),
-		prototype = channels.attr('data-prototype').replace(/__name__label__/g, '')
-	;
-	
-	// Ajout du button#add_channel
-	channels.append(addButton);
-	addButton.on('click', addChannel);
-	
-	// Compteur de champs
-	var index = channels.find('input').length;
-	
-	// Ajout d'un premier champs
-	if ( index === 0 ) {
-		addChannel();
-	} else {
-		channels.children('div').each(function () {
-			addDeleteButton($(this));
-		})
+	for ( var i = 0, c = collections.length; i < c; i++ ) {
+		if ( collections[i].length !== 0 ) {
+			manageCollection(collections[i]);
+		}
 	}
 	
-	function addChannel () {
-		var channel = $( prototype.replace(/__name__/g, index) );
-		addDeleteButton(channel);
-		channels.append(channel);
-		index++;
-	}
-	
-	function addDeleteButton ( channel ) {
-		var link = $('<button type="button" id="delete">Supprimer</button>');
-		channel.append(link);
-		link.on('click', function () {
-			channel.remove();
-		});
+	function manageCollection ( collection ) {
+		var addButton = $('<button type="button" id="add_channel">Ajouter</button>'),
+			prototype = collection.attr('data-prototype').replace(/__name__label__/g, '')
+		;
+		
+		// Ajout du button#add_channel
+		collection.append(addButton);
+		addButton.on('click', addField);
+		
+		// Compteur de champs
+		var index = collection.find('input').length;
+		
+		// Ajout d'un premier champs
+		if ( index === 0 ) {
+			addField();
+		} else {
+			collection.children('div').each(function () {
+				addDeleteButton($(this));
+			})
+		}
+		
+		function addField () {
+			var fields = $( prototype.replace(/__name__/g, index) );
+			addDeleteButton(fields);
+			collection.append(fields);
+			index++;
+		}
+		
+		function addDeleteButton ( fields ) {
+			var link = $('<button type="button" id="delete">Supprimer</button>');
+			fields.append(link);
+			link.on('click', function () {
+				fields.remove();
+			});
+		}
 	}
 });
