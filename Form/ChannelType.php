@@ -49,20 +49,22 @@ class ChannelType extends AbstractType
         $repo = $this->em->getRepository('ZzPyroBundle:Channel');
         
         if ( strpos($idOrUser, 'user:') === 0 ) {
-            $channel->setUsername(substr($idOrUser, 5));
+            $username = substr($idOrUser, 5);
+            $e->setData($channel = $this->ytRequestor->resolveChannel($username));
             
-            if ( !$this->ytRequestor->hydrateChannel($channel) ) {
+            if ( !$channel ) {
                 $form->addError(new FormError (
-                    'The channel from the user ' . $channel->getUsername() . ' doesn\'t exist.'
+                    'The channel from the user ' . $username . ' doesn\'t exist.'
                 ));
             }
         } else {
             $channel->setId($idOrUser);
         }
+        
         if ( $repo->isStored($channel) ) {
             $e->setData($repo->findOneById($channel->getId()));
             
-        } elseif ( !$channel->getUsername() && !$this->ytRequestor->hydrateChannel($channel) ) {
+        } elseif ( !$this->ytRequestor->hydrateChannel($channel) ) {
             $form->addError(new FormError (
                 'The channel ' . $channel->getId() . ' doesn\'t exist.'
             ));
