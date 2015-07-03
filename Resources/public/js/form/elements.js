@@ -1,6 +1,7 @@
 jQuery(function($){
 	// BestOf
 	var bestOf = {
+		form: $('[name="zz_pyrobundle_bestof"]'),
 		collections: [
 			$('#zz_pyrobundle_bestof_channels'),
 			$('#zz_pyrobundle_bestof_externalVideos')
@@ -8,6 +9,7 @@ jQuery(function($){
 	};
 	
 	manageCollections(bestOf.collections);
+	transformVideosUrlToId(bestOf.form, bestOf.collections[1]);
 	
 	//Extract
 	var extract = {

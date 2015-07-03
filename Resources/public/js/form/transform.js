@@ -1,3 +1,11 @@
+function transformVideosUrlToId ( form, collection ) {
+	inputs = collection.find(':regex(id,^zz_pyrobundle_[^_]+_externalVideos_\\d+_id$)');
+	console.log(inputs);
+	inputs.each(function () {
+		transformVideoUrlToId(form, $(this), $(this).prev('label'));
+	});
+}
+
 function transformVideoUrlToId ( form, text, label ) {
 	form.on('submit', function ( e ) {
 		if ( text.val() ) {

@@ -1,3 +1,6 @@
+/**
+ * Found on https://gist.github.com/aymanfarhat/5608517
+ */
 function urlObject(options) {
     "use strict";
     /*global window, document*/
