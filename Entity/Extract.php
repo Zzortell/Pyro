@@ -5,6 +5,7 @@ namespace Zz\PyroBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Extract
@@ -56,6 +57,26 @@ class Extract
     protected $video;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Zz\PyroBundle\Entity\BestOf")
+     * @ORM\JoinColumn(nullable=true, name="bestof_id")
+     * @Assert\Valid
+     */
+    protected $bestOf;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("boolean", message="Extract's chosen should be a {{ type }}.")
+     * @Assert\NotNull(message="Extract's chosen should not be null.")
+     */
+    protected $chosen = false;
+    
+    /**
+     * @ORM\Column(name="proposal_date", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    protected $proposalDate;
+    
+    /**
      * @Assert\Callback
      */
     public function validateRange ( ExecutionContextInterface $context )
@@ -91,6 +112,21 @@ class Extract
             $context->addViolationAt(
                 'endSeconds',
                 'The extract must end before or at the same time as the video (ends at %end%).',
+                [ '%end%' => $this->getEndSeconds() ],
+                $this->getEndSeconds()
+            );
+        }
+    }
+    
+    /**
+     * @Assert\Callback
+     */
+    public function validateChosen ( ExecutionContextInterface $context )
+    {
+        if ( $this->isChosen() && !$this->getBestOf() ) {
+            $context->addViolationAt(
+                'chosen',
+                'The extract must not be chosen if it\'s not linked to a BestOf.',
                 [ '%end%' => $this->getEndSeconds() ],
                 $this->getEndSeconds()
             );
@@ -203,5 +239,77 @@ class Extract
     public function getVideo()
     {
         return $this->video;
+    }
+
+    /**
+     * Set chosen
+     *
+     * @param boolean $chosen
+     *
+     * @return Extract
+     */
+    public function setChosen($chosen)
+    {
+        $this->chosen = $chosen;
+
+        return $this;
+    }
+
+    /**
+     * Get chosen
+     *
+     * @return boolean
+     */
+    public function isChosen()
+    {
+        return $this->chosen;
+    }
+
+    /**
+     * Set proposalDate
+     *
+     * @param \DateTime $proposalDate
+     *
+     * @return Extract
+     */
+    public function setProposalDate($proposalDate)
+    {
+        $this->proposalDate = $proposalDate;
+
+        return $this;
+    }
+
+    /**
+     * Get proposalDate
+     *
+     * @return \DateTime
+     */
+    public function getProposalDate()
+    {
+        return $this->proposalDate;
+    }
+
+    /**
+     * Set bestOf
+     *
+     * @param \Zz\PyroBundle\Entity\BestOf $bestOf
+     *
+     * @return Extract
+     */
+    public function setBestOf(\Zz\PyroBundle\Entity\BestOf $bestOf = null)
+    {
+        $this->bestOf = $bestOf;
+
+        return $this;
+    }
+
+    /**
+     * Get bestOf
+     *
+     * @return \Zz\PyroBundle\Entity\BestOf
+     */
+    public function getBestOf()
+    {
+        return $this->bestOf;
     }
 }
