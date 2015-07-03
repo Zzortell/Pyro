@@ -13,12 +13,9 @@ class BestOfController extends Controller
 		$bestof = new BestOf;
 		$bestof->setManager($this->get('zz_pyro.profile_manager')->getProfile());
 		
-		$form = $this->createForm(
-			$this->get('zz_pyro.type_factory')->createBestOfType(),
-			$bestof, [
-				'action' => $this->generateUrl('zz_pyro_bestof_add')
-			]
-		);
+		$form = $this->createForm('bestof', $bestof, [
+			'action' => $this->generateUrl('zz_pyro_bestof_add')
+		]);
 		
 		if ( $form->handleRequest($request)->isValid() ) {
 			$em = $this->getDoctrine()->getManager();

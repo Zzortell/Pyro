@@ -45,7 +45,7 @@ class VideoAddType extends AbstractType
      */
     public function getName()
     {
-        return 'zz_pyrobundle_video_add';
+        return 'video_add';
     }
     
     public function getParent ()

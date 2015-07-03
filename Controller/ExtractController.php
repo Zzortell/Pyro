@@ -14,12 +14,9 @@ class ExtractController extends Controller
 		$extract = new Extract;
 		$extract->setAuthor($this->get('zz_pyro.profile_manager')->getProfile());
 		
-		$form = $this->createForm(
-			$this->get('zz_pyro.type_factory')->createExtractType(),
-			$extract, [
-				'action' => $this->generateUrl('zz_pyro_extract_add')
-			]
-		);
+		$form = $this->createForm('extract', $extract, [
+			'action' => $this->generateUrl('zz_pyro_extract_add')
+		]);
 		
 		if ( $form->handleRequest($request)->isValid() ) {
 			$em = $this->getDoctrine()->getManager();

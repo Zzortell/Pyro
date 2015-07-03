@@ -8,13 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class BestOfType extends AbstractType
 {
-    protected $typeFactory;
-    
-    public function __construct ( TypeFactory $typeFactory )
-    {
-        $this->typeFactory = $typeFactory;
-    }
-    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -24,7 +17,7 @@ class BestOfType extends AbstractType
         $builder
             ->add('name',       'text')
             ->add('channels',   'collection', [
-                'type'          => $this->typeFactory->createChannelType(),
+                'type'          => 'channel',
                 'allow_add'     => true,
                 'allow_delete'  => true
             ])
@@ -35,7 +28,7 @@ class BestOfType extends AbstractType
                 'required'  => false
             ])
             ->add('externalVideos', 'collection', [
-                'type'      => $this->typeFactory->createVideoType(),
+                'type'      => 'video',
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'mapped'    => false
@@ -59,6 +52,6 @@ class BestOfType extends AbstractType
      */
     public function getName()
     {
-        return 'zz_pyrobundle_bestof';
+        return 'bestof';
     }
 }

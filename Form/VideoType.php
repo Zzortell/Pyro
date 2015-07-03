@@ -78,6 +78,6 @@ class VideoType extends AbstractType
      */
     public function getName()
     {
-        return 'zz_pyrobundle_video';
+        return 'video';
     }
 }

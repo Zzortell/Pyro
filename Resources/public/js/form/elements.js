@@ -1,10 +1,10 @@
 jQuery(function($){
 	// BestOf
 	var bestOf = {
-		form: $('[name="zz_pyrobundle_bestof"]'),
+		form: $('[name="bestof"]'),
 		collections: [
-			$('#zz_pyrobundle_bestof_channels'),
-			$('#zz_pyrobundle_bestof_externalVideos')
+			$('#bestof_channels'),
+			$('#bestof_externalVideos')
 		]
 	};
 	
@@ -13,10 +13,10 @@ jQuery(function($){
 	
 	//Extract
 	var extract = {
-		form: 					$('[name="zz_pyrobundle_extract"]'),
-		videoSelect: 			$('#zz_pyrobundle_extract_video'),
-		externalVideoIdInput: 	$('#zz_pyrobundle_extract_externalVideo_id'),
-		externalVideoIdLabel: 	$('[for="zz_pyrobundle_extract_externalVideo_id"]')
+		form: 					$('[name="extract"]'),
+		videoSelect: 			$('#extract_video'),
+		externalVideoIdInput: 	$('#extract_externalVideo_id'),
+		externalVideoIdLabel: 	$('[for="extract_externalVideo_id"]')
 	};
 	
 	manageSelectOrText(extract.videoSelect, extract.externalVideoIdInput);

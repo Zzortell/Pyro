@@ -14,12 +14,9 @@ class VideoController extends Controller
 	{
 		$video = new Video;
 		
-		$form = $this->createForm(
-			$this->get('zz_pyro.type_factory')->createVideoAddType(),
-			$video, [
-				'action' => $this->generateUrl('zz_pyro_video_add')
-			]
-		);
+		$form = $this->createForm('video_add', $video, [
+			'action' => $this->generateUrl('zz_pyro_video_add')
+		]);
 		
 		$form->handleRequest($request);
 		

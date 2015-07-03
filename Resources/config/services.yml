@@ -7,6 +7,30 @@ services:
         class: Zz\PyroBundle\Entity\YoutubeRequestor
         arguments: [%yt_data_api.dev_key%]
 
-    zz_pyro.type_factory:
-        class: Zz\PyroBundle\Form\TypeFactory
+    zz_pyro.form.video:
+        class: Zz\PyroBundle\Form\VideoType
         arguments: [@doctrine.orm.entity_manager, @zz_pyro.youtube_requestor]
+        tags:
+            - { name: form.type, alias: video }
+
+    zz_pyro.form.video_add:
+        class: Zz\PyroBundle\Form\VideoAddType
+        arguments: [@doctrine.orm.entity_manager, @zz_pyro.youtube_requestor]
+        tags:
+            - { name: form.type, alias: video_add }
+
+    zz_pyro.form.channel:
+        class: Zz\PyroBundle\Form\ChannelType
+        arguments: [@doctrine.orm.entity_manager, @zz_pyro.youtube_requestor]
+        tags:
+            - { name: form.type, alias: channel }
+
+    zz_pyro.form.extract:
+        class: Zz\PyroBundle\Form\ExtractType
+        tags:
+            - { name: form.type, alias: extract }
+
+    zz_pyro.form.bestof:
+        class: Zz\PyroBundle\Form\BestOfType
+        tags:
+            - { name: form.type, alias: bestof }

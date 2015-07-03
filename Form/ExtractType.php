@@ -11,13 +11,6 @@ use Symfony\Component\Form\FormError;
 
 class ExtractType extends AbstractType
 {
-	protected $typeFactory;
-	
-	public function __construct ( TypeFactory $typeFactory )
-	{
-		$this->typeFactory = $typeFactory;
-	}
-	
 	/**
 	 * @param FormBuilderInterface $builder
 	 * @param array $options
@@ -31,7 +24,7 @@ class ExtractType extends AbstractType
 				'multiple' 	=> false,
 				'required' 	=> false
 			])
-			->add('externalVideo', 	$this->typeFactory->createVideoType(),
+			->add('externalVideo', 	'video',
 					[ 'mapped' => false, 'required' => false ])
 			->add('startSeconds', 	'integer')
 			->add('endSeconds', 	'integer')
@@ -73,6 +66,6 @@ class ExtractType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'zz_pyrobundle_extract';
+		return 'extract';
 	}
 }

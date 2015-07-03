@@ -86,6 +86,6 @@ class ChannelType extends AbstractType
      */
     public function getName()
     {
-        return 'zz_pyrobundle_channel';
+        return 'channel';
     }
 }
