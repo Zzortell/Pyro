@@ -18,8 +18,8 @@ class Channel
      *
      * @ORM\Column(name="id", type="string")
      * @ORM\Id
-     * @Assert\Type("string")
-     * @Assert\NotBlank
+     * @Assert\Type("string", message="Channel's id should be a {{ type }}.")
+     * @Assert\NotBlank(message="Channel's id should not be blank.")
      */
     protected $id;
     

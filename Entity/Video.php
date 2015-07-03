@@ -20,8 +20,8 @@ class Video
      *
      * @ORM\Column(name="id", type="string")
      * @ORM\Id
-     * @Assert\Type("string")
-     * @Assert\NotBlank
+     * @Assert\Type("string", message="Video's id should be a {{ type }}.")
+     * @Assert\NotBlank(message="Video's id should not be blank.")
      */
     private $id;
 

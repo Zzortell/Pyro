@@ -27,9 +27,9 @@ class Extract
      * @var integer
      *
      * @ORM\Column(name="start_seconds", type="integer")
-     * @Assert\Type("integer")
-     * @Assert\GreaterThanOrEqual(0)
-     * @Assert\NotNull
+     * @Assert\Type("integer", message="Extract's startSeconds should be a {{ type }}.")
+     * @Assert\GreaterThanOrEqual(0, message="Extract's startSeconds should be positive.")
+     * @Assert\NotNull(message="Extract's startSeconds should not be null.")
      */
     protected $startSeconds;
 
@@ -37,8 +37,8 @@ class Extract
      * @var integer
      *
      * @ORM\Column(name="end_seconds", type="integer")
-     * @Assert\Type("integer")
-     * @Assert\NotNull
+     * @Assert\Type("integer", message="Extract's endSeconds should be a {{ type }}.")
+     * @Assert\NotNull(message="Extract's endSeconds should not be null.")
      */
     protected $endSeconds;
     
