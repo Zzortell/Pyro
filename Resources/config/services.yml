@@ -15,7 +15,6 @@ services:
 
     zz_pyro.form.video_add:
         class: Zz\PyroBundle\Form\VideoAddType
-        arguments: [@doctrine.orm.entity_manager, @zz_pyro.youtube_requestor]
         tags:
             - { name: form.type, alias: video_add }
 

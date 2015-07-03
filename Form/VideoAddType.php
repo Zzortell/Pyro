@@ -10,15 +10,6 @@ use Doctrine\ORM\EntityManager;
 
 class VideoAddType extends AbstractType
 {
-    protected $em;
-    protected $ytRequestor;
-    
-    public function __construct ( EntityManager $em, YoutubeRequestor $ytRequestor )
-    {
-        $this->em = $em;
-        $this->ytRequestor = $ytRequestor;
-    }
-    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -50,6 +41,6 @@ class VideoAddType extends AbstractType
     
     public function getParent ()
     {
-        return new VideoType ($this->em, $this->ytRequestor);
+        return 'video';
     }
 }
