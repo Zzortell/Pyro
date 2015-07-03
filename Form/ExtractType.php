@@ -18,6 +18,11 @@ class ExtractType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
+			->add('bestof', 		'entity', [
+				'class' 	=> 'ZzPyroBundle:BestOf',
+				'property' 	=> 'name',
+				'multiple' 	=> false
+			])
 			->add('video', 			'entity', [
 				'class' 	=> 'ZzPyroBundle:Video',
 				'property' 	=> 'title',
