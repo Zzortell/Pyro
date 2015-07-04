@@ -126,13 +126,27 @@ class Extract
         if ( $this->isChosen() && !$this->getBestOf() ) {
             $context->addViolationAt(
                 'chosen',
-                'The extract must not be chosen if it\'s not linked to a BestOf.',
-                [ '%end%' => $this->getEndSeconds() ],
-                $this->getEndSeconds()
+                'The extract must not be chosen if it\'s not linked to a BestOf.'
             );
         }
     }
     
+    /**
+     * @Assert\Callback
+     */
+    public function validateVideo ( ExecutionContextInterface $context )
+    {
+        if ( !$this->isChosen() ) {
+            return;
+        }
+        
+        if ( !in_array($this->getVideo(), $this->getBestOf()->getVideos(), true) ) {
+            $context->addViolationAt(
+                'video',
+                'The extract must refer to a video linked to the BestOf.'
+            );
+        }
+    }
 
 
     /**
