@@ -16,25 +16,33 @@
 
 {% block body %}
 	<div class="container-fluid">
-		<header>
-			<h1>{{ 'header.sitename' |trans }}</h1>
-			<p>{{ 'header.subtitle' |trans }}</p>
-			<p>
-				<a href="https://www.youtube.com/user/DansLeDoute">
-					{{ 'header.link_yt' |trans }}
-				</a>
-			</p>
-			<p>
-				<a href="https://www.youtube.com/user/izzyManiaKK">
-					{{ 'header.link_izzi' |trans }}
-				</a>
-			</p>
-			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-				<a href="{{ path('fos_user_security_logout') }}">
-					{{ 'header.logout' |trans }}
-				</a>
-			{% endif %}
-		</header>
+		<div id="header_container">
+			<header>
+				<div class="titles">
+					<h1>{{ 'header.sitename' |trans }}</h1>
+					<h2>{{ 'header.subtitle' |trans }}</h2>
+				</div>
+				<div class="links">
+					<p>
+						<a href="https://www.youtube.com/user/DansLeDoute">
+							<i class="fa fa-hand-o-right"></i>
+							{{ 'header.link_yt' |trans }}
+						</a>
+					</p>
+					<p>
+						<a href="https://www.youtube.com/user/izzyManiaKK">
+							<i class="fa fa-hand-o-right"></i>
+							{{ 'header.link_izzi' |trans }}
+						</a>
+					</p>
+					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+						<a href="{{ path('fos_user_security_logout') }}">
+							{{ 'header.logout' |trans }}
+						</a>
+					{% endif %}
+				</div>
+			</header>
+		</div>
 		<section id="bodier">
 			<section id="content">
 				<article>

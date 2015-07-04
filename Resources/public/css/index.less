@@ -1,15 +1,64 @@
 @import "layout.less";
 
-header
+body
+{
+	background-color: @color_body;
+	font-family: Verdana, sans-serif;
+}
+
+#header_container
 {
 	.make-sm-column(12);
+	.heightPerWidth(100%, 100%/6);
+	padding: 0;
 	
-	background-color: @color_header;
-	color: @color_header_font;
-	
-	a
+	header
 	{
-		color: @color_header_link;
+		background-image: url('../img/izzy_banner.jpg');
+		background-size: cover;
+		
+		color: @color_header_font;
+		
+		padding: 15px;
+		padding-right: 100%*(702/2120);
+		
+		> *
+		{
+			margin: 0 2vw;
+		}
+		
+		.titles
+		{
+			font-size: 1.7vw;
+			
+			h1
+			{
+				font-size: 2.6em;
+			}
+			
+			h2
+			{
+				font-size: 1.2em;
+			}
+		}
+		
+		.links
+		{
+			font-size: 1.7vw;
+			position: absolute;
+			bottom: 0;
+			padding: 15px;
+			
+			p, a
+			{
+				color: @color_header_link;
+				text-decoration: none;
+				
+				.onfocus({
+					color: @color_header_font;
+				});
+			}
+		}
 	}
 }
 
