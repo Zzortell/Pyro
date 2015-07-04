@@ -43,31 +43,33 @@
 				</div>
 			</header>
 		</div>
-		<section id="bodier">
-			<section id="content">
-				<article>
-					<h1>Les derniers best-of</h1>
-				</article>
-				<article>
-					<h1>Objectif de la semaine</h1>
-				</article>
-				<article>
-					<h1>Vidéos à couvrir</h1>
-				</article>
+		<div id="bodier_container">
+			<section id="bodier">
+				<section id="content">
+					<article>
+						<h1>Les derniers best-of</h1>
+					</article>
+					<article>
+						<h1>Objectif de la semaine</h1>
+					</article>
+					<article>
+						<h1>Vidéos à couvrir</h1>
+					</article>
+				</section>
+				<section id="part">
+					{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+						<section id="user_login_container"
+								 path="{{ path('fos_user_security_login') }}">
+						</section>
+						<section id="user_register_container"
+								 path="{{ path('fos_user_registration_register') }}">
+						</section>
+					{% else %}
+						{{ render(controller('ZzPyroBundle:Extract:add')) }}
+					{% endif %}
+				</section>
+				<div class="after"></div>
 			</section>
-			<section id="part">
-				{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-					<section id="user_login_container"
-							 path="{{ path('fos_user_security_login') }}">
-					</section>
-					<section id="user_register_container"
-							 path="{{ path('fos_user_registration_register') }}">
-					</section>
-				{% else %}
-					{{ render(controller('ZzPyroBundle:Extract:add')) }}
-				{% endif %}
-			</section>
-			<div class="after"></div>
-		</section>
+		</div>
 	</div>
 {% endblock %}

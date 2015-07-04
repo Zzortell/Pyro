@@ -62,42 +62,58 @@ body
 	}
 }
 
-#bodier
+#bodier_container
 {
 	.make-sm-column(12);
-	.make-row;
 	margin: 0;
 	padding: 0;
 	
-	#content
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/black+0,510016+100 */
+	background: black; /* Old browsers */
+	background: -moz-linear-gradient(-135deg, black 0%, @color_body 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,black), color-stop(100%,@color_body)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-135deg, black 0%, @color_body 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-135deg, black 0%, @color_body 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-135deg, black 0%, @color_body 100%); /* IE10+ */
+	background: linear-gradient(-135deg, black 0%, @color_body 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='black', endColorstr='@color_body',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	
+	#bodier
 	{
-		.make-sm-column(8);
+		min-height: 100vh; //TO DELETE
+		max-width: 800px;
+		margin: auto;
 		
-		article
+		#content
 		{
-			background-color: @color_article;
-			padding: 10px;
-			margin: 15px;
+			.make-sm-column(8);
+			
+			article
+			{
+				background-color: @color_article;
+				padding: 10px;
+				margin: 15px;
+			}
 		}
-	}
-	
-	#part
-	{
-		.make-sm-column(4);
-		background-color: @color_part;
-	}
-	
-	.after
-	{
-		content: '';
-		position: absolute !important;
-		top: 0;
-		bottom: 0;
-		z-index: -1;
-		right: 0;
 		
-		background-color: @color_part;
-		.make-sm-column(4);
-		padding: 0;
+		#part
+		{
+			.make-sm-column(3);
+			background-color: @color_part;
+		}
+		
+		.after
+		{
+			content: '';
+			position: absolute !important;
+			top: 0;
+			bottom: 0;
+			z-index: -1;
+			right: 0;
+			
+			background-color: @color_part;
+			.make-sm-column(4);
+			padding: 0;
+		}
 	}
 }
