@@ -11,9 +11,8 @@
 
 {% block js_lib %}
 	{{ parent() }}
-	{% if bestof.done %}
-		<script src="https://www.youtube.com/iframe_api"></script>
-	{% endif %}
+	<script src="https://www.youtube.com/iframe_api"></script>
+	<script src="{{ asset('bundles/zzpyro/js/listen_yt.js') }}"></script>
 {% endblock %}
 
 {% block javascripts %}
@@ -21,13 +20,14 @@
 	{% if bestof.done %}
 		<script>
 			var player;
-			function onYouTubeIframeAPIReady () {
+			listenYt(function () {
 				player = new YT.Player('youtube_player', {
 					videoId: '{{ bestof.video.id }}',
 				});
-			}
+			});
 		</script>
 	{% endif %}
+	<script src="{{ asset('bundles/zzpyro/js/video.js') }}"></script>
 {% endblock %}
 
 {% block bodier %}

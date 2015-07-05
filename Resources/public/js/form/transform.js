@@ -1,6 +1,5 @@
 function transformVideosUrlToId ( form, collection ) {
 	inputs = collection.find(':regex(id,^[^_]+_externalVideos_\\d+_id$)');
-	console.log(inputs);
 	inputs.each(function () {
 		transformVideoUrlToId(form, $(this), $(this).prev('label'));
 	});

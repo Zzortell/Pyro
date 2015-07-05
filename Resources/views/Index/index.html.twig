@@ -9,11 +9,6 @@
 	{% endstylesheets %}
 {% endblock %}
 
-{% block javascripts %}
-	{{ parent() }}
-	<script src="{{ asset('bundles/zzpyro/js/user.js') }}"></script>
-{% endblock %}
-
 {% block bodier %}
 	<section id="content">
 		<article>
@@ -39,15 +34,6 @@
 		</article>
 	</section>
 	<section id="part">
-		{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-			<section id="user_login_container"
-					 path="{{ path('fos_user_security_login') }}">
-			</section>
-			<section id="user_register_container"
-					 path="{{ path('fos_user_registration_register') }}">
-			</section>
-		{% else %}
-			{{ render(controller('ZzPyroBundle:Extract:add')) }}
-		{% endif %}
+		{% include 'ZzPyroBundle:Form:extract.html.twig' %}
 	</section>
 {% endblock %}

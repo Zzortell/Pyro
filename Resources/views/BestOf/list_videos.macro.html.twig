@@ -1,7 +1,14 @@
 {% macro list ( bestof ) %}
-	<ul>
+	<ul class="video_list">
 		{% for video in bestof.videos %}
-			<li><a href="">{{ video.title }}</a></li>
+			<li><a href="#" class="video" id="{{ video.id }}">{{ video.title }}</a></li>
 		{% endfor %}
+		<template>
+			<section class="video_more">
+				<div id="youtube_player_video___id__"></div>
+				<h1>Proposer un extrait</h1>
+				{% include 'ZzPyroBundle:Form:extract.html.twig' %}
+			</section>
+		</template>
 	</ul>
 {% endmacro %}
