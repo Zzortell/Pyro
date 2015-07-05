@@ -1,8 +1,3 @@
-@import "../bootstrap/less/variables.less";
-@import "../bootstrap/less/mixins.less";
-@import "../bootstrap/less/grid.less";
-/* END BOOTSTRAP */
-
 @import "palette.less";
 @import "mixins.less";
 @import "form.less";
@@ -45,7 +40,7 @@ body
 
 #header_container
 {
-	.make-sm-column(12);
+	width: 100%;
 	.heightPerWidth(100%, 100%/6);
 	max-width: @media_md_max;
 	margin: auto;
@@ -106,7 +101,8 @@ body
 
 #bodier_container
 {
-	.make-sm-column(12);
+	width: 100%;
+	position: relative;
 	margin: 0;
 	padding: 0;
 	

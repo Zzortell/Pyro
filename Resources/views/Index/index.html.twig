@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block bodier %}
+{% spaceless %}
 	<section id="content">
 		<article>
 			<h1>{{ 'content.published' |trans }}</h1>
@@ -36,4 +37,5 @@
 	<section id="part">
 		{% include 'ZzPyroBundle:Form:extract.html.twig' %}
 	</section>
+{% endspaceless %}
 {% endblock %}

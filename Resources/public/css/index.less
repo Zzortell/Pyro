@@ -1,8 +1,15 @@
 @import "layout.less";
 
+#content, #part
+{
+	padding: 0 15px;
+	display: inline-block;
+	vertical-align: top;
+}
+
 #content
 {
-	.make-sm-column(8);
+	width: 530px;
 	
 	article
 	{
@@ -57,7 +64,7 @@
 
 #part
 {
-	.make-sm-column(3);
+	width: 210px;
 	background-color: @color_article;
 	text-align: center;
 }
