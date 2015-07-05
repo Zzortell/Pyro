@@ -1,4 +1,9 @@
 services:
+    twig.extension.intl:
+       class: Twig_Extensions_Extension_Intl
+       tags:
+           - { name: twig.extension }
+
     zz_pyro.profile_manager:
         class: Zz\PyroBundle\Entity\ProfileManager
         arguments: [@security.context, @doctrine.orm.entity_manager]

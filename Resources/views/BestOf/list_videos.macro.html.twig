@@ -1,0 +1,7 @@
+{% macro list ( bestof ) %}
+	<ul>
+		{% for video in bestof.videos %}
+			<li><a href="">{{ video.title }}</a></li>
+		{% endfor %}
+	</ul>
+{% endmacro %}

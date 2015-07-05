@@ -1,3 +1,9 @@
+zz_pyro_bestof_display:
+    path:     /{id}
+    defaults: { _controller: ZzPyroBundle:BestOf:display }
+    requirements:
+        id: \d+
+
 zz_pyro_bestof_add:
     path:     /add
     defaults: { _controller: ZzPyroBundle:BestOf:add }

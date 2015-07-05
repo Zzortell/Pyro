@@ -1,227 +1,119 @@
 @import "layout.less";
 
-body
+#content
 {
-	background-color: @color_izzy;
-	font-family: Verdana, sans-serif;
-}
-
-#body_container
-{
-	position: relative;
+	.make-sm-column(8);
 	
-	&:before
+	article
 	{
-		content: "";
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		width: 50%;
-		background-color: #36000F;
-	}
-}
-
-#header_container
-{
-	.make-sm-column(12);
-	.heightPerWidth(100%, 100%/6);
-	max-width: @media_md_max;
-	margin: auto;
-	padding: 0;
-	float: none !important;
-	
-	header
-	{
-		background-image: url('../img/izzy_banner.jpg');
-		background-size: cover;
-		color: @color_header_font;
-		padding: 15px;
-		padding-right: 100%*(702/2120);
+		background-color: @color_article;
+		padding: 10px;
+		margin-top: 15px;
 		
-		> *
+		h1
 		{
-			margin: 0 2vw;
+			font-size: 2em;
 		}
-		
-		.titles
+	}
+	
+	#article_bestof
+	{
+		div
 		{
-			font-size: 1.7vw;
-			
-			@media (min-width: @media_lg_min) {
-				font-size: 1.6em;
-			}
-			
-			h1
-			{
-				font-size: 2.6em;
-			}
+			margin: 10px 5px;
 			
 			h2
 			{
-				font-size: 1.2em;
-			}
-		}
-		
-		.links
-		{
-			font-size: 1.7vw;
-			position: absolute;
-			bottom: 0;
-			padding: 15px;
-			
-			p, a
-			{
-				color: @color_header_link;
-				text-decoration: none;
+				font-size: 1.5em;
 				
-				.onfocus({
-					color: @color_header_font;
-				});
+				a
+				{
+					color: @color_maniakk;
+					text-decoration: none;
+				}
+			}
+			
+			ul
+			{
+				list-style-type: none;
+				
+				li
+				{
+					border-left: solid @color_maniakk 3px;
+					margin-left: 5px;
+					padding-left: 10px;
+					
+					a
+					{
+						font-size: .7em;
+						color: black;
+						text-decoration: none;
+					}
+				}
 			}
 		}
 	}
 }
 
-#bodier_container
+#part
 {
-	.make-sm-column(12);
-	margin: 0;
-	padding: 0;
+	.make-sm-column(3);
+	background-color: @color_article;
+	text-align: center;
 	
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/@color_izzy+0,510016+100 */
-	background: @color_izzy; /* Old browsers */
-	background: -moz-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,@color_izzy), color-stop(100%,@color_maniakk)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* IE10+ */
-	background: linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color_izzy', endColorstr='@color_maniakk',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-	
-	#bodier
+	section
 	{
-		min-height: 100vh; //TO DELETE
-		max-width: 800px;
-		margin: auto;
-		font-size: 1.2em;
+		margin: 35px 0;
 		
-		#content
+		h1
 		{
-			.make-sm-column(8);
-			
-			article
-			{
-				background-color: @color_article;
-				padding: 10px;
-				margin-top: 15px;
-				
-				h1
-				{
-					font-size: 2em;
-				}
-			}
-			
-			#article_bestof
-			{
-				div
-				{
-					margin: 10px 5px;
-					
-					h2
-					{
-						font-size: 1.5em;
-						
-						a
-						{
-							color: @color_maniakk;
-							text-decoration: none;
-						}
-					}
-					
-					ul
-					{
-						list-style-type: none;
-						
-						li
-						{
-							border-left: solid @color_maniakk 3px;
-							margin-left: 5px;
-							padding-left: 10px;
-							
-							a
-							{
-								font-size: .7em;
-								color: black;
-								text-decoration: none;
-							}
-						}
-					}
-				}
-			}
+			font-size: 1.7em;
 		}
 		
-		#part
+		form
 		{
-			.make-sm-column(3);
-			background-color: @color_article;
-			text-align: center;
-			
-			section
+			.widget
 			{
-				margin: 35px 0;
+				margin: 10px 0;
 				
-				h1
+				input
 				{
-					font-size: 1.7em;
-				}
-				
-				form
-				{
-					.widget
+					&[type="text"],
+					&[type="email"],
+					&[type="password"]
 					{
-						margin: 10px 0;
-						
-						input
-						{
-							&[type="text"],
-							&[type="email"],
-							&[type="password"]
-							{
-								background-color: @color_maniakk;
-								border: none;
-								margin: 5px 0;
-								padding: 5px 10px;
-								font-size: .8em;
-								color: @color_header_font;
-								
-								&:focus
-								{
-									border: none;
-								}
-							}
-						}
-					}
-					
-					.option
-					{
-						label[for="remember_me"]
-						{
-							font-size: .8em;
-						}
-					}
-					
-					input[type="submit"]
-					{
-						border: none;
 						background-color: @color_maniakk;
-						color: @color_header_font;
-						cursor: pointer;
+						border: none;
+						margin: 5px 0;
 						padding: 5px 10px;
-						margin-top: 5px;
 						font-size: .8em;
+						color: @color_header_font;
+						
+						&:focus
+						{
+							border: none;
+						}
 					}
 				}
+			}
+			
+			.option
+			{
+				label[for="remember_me"]
+				{
+					font-size: .8em;
+				}
+			}
+			
+			input[type="submit"]
+			{
+				border: none;
+				background-color: @color_maniakk;
+				color: @color_header_font;
+				cursor: pointer;
+				padding: 5px 10px;
+				margin-top: 5px;
+				font-size: .8em;
 			}
 		}
 	}

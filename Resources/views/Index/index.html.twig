@@ -14,74 +14,40 @@
 	<script src="{{ asset('bundles/zzpyro/js/user.js') }}"></script>
 {% endblock %}
 
-{% block body %}
-	<div id="body_container">
-		<div id="header_container">
-			<header>
-				<div class="titles">
-					<h1>{{ 'header.sitename' |trans }}</h1>
-					<h2>{{ 'header.subtitle' |trans }}</h2>
+{% block bodier %}
+	<section id="content">
+		<article>
+			<h1>{{ 'content.published' |trans }}</h1>
+		</article>
+		<article>
+			<h1>{{ 'content.goal' |trans }}</h1>
+		</article>
+		<article id="article_bestof">
+			<h1>{{ 'content.bestof' |trans }}</h1>
+			{% for bestof in bestofList %}
+				<div>
+					<h2>
+						<a href="{{ path('zz_pyro_bestof_display', { 'id': bestof.id }) }}">
+							{{ bestof.name }}
+						</a>
+						({{ bestof.manager.user.username }})
+					</h2>
+					{% import "ZzPyroBundle:BestOf:list_videos.macro.html.twig" as videos %}
+					{{ videos.list(bestof) }}
 				</div>
-				<div class="links">
-					<p>
-						<a href="https://www.youtube.com/user/DansLeDoute">
-							<i class="fa fa-hand-o-right"></i>
-							{{ 'header.link_yt' |trans }}
-						</a>
-					</p>
-					<p>
-						<a href="https://www.youtube.com/user/izzyManiaKK">
-							<i class="fa fa-hand-o-right"></i>
-							{{ 'header.link_izzi' |trans }}
-						</a>
-					</p>
-					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-						<a href="{{ path('fos_user_security_logout') }}">
-							{{ 'header.logout' |trans }}
-						</a>
-					{% endif %}
-				</div>
-			</header>
-		</div>
-		<div id="bodier_container">
-			<section id="bodier">
-				<section id="content">
-					<article>
-						<h1>{{ 'content.published' |trans }}</h1>
-					</article>
-					<article>
-						<h1>{{ 'content.goal' |trans }}</h1>
-					</article>
-					<article id="article_bestof">
-						<h1>{{ 'content.bestof' |trans }}</h1>
-						{% for bestof in bestofList %}
-							<div>
-								<h2>
-									<a href="">{{ bestof.name }}</a>
-									({{ bestof.manager.user.username }})
-								</h2>
-								<ul>
-									{% for video in bestof.videos %}
-										<li><a href="">{{ video.title }}</a></li>
-									{% endfor %}
-								</ul>
-							</div>
-						{% endfor %}
-					</article>
-				</section>
-				<section id="part">
-					{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-						<section id="user_login_container"
-								 path="{{ path('fos_user_security_login') }}">
-						</section>
-						<section id="user_register_container"
-								 path="{{ path('fos_user_registration_register') }}">
-						</section>
-					{% else %}
-						{{ render(controller('ZzPyroBundle:Extract:add')) }}
-					{% endif %}
-				</section>
+			{% endfor %}
+		</article>
+	</section>
+	<section id="part">
+		{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+			<section id="user_login_container"
+					 path="{{ path('fos_user_security_login') }}">
 			</section>
-		</div>
-	</div>
+			<section id="user_register_container"
+					 path="{{ path('fos_user_registration_register') }}">
+			</section>
+		{% else %}
+			{{ render(controller('ZzPyroBundle:Extract:add')) }}
+		{% endif %}
+	</section>
 {% endblock %}

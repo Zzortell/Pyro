@@ -19,3 +19,111 @@ h1, h2, h3, h4, h5, h6
 
 @media_lg_min: 1501px;
 @media_md_max: @media_lg_min - 1;
+
+body
+{
+	background-color: @color_izzy;
+	font-family: Verdana, sans-serif;
+}
+
+#body_container
+{
+	position: relative;
+	
+	&:before
+	{
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 50%;
+		background-color: #36000F;
+	}
+}
+
+#header_container
+{
+	.make-sm-column(12);
+	.heightPerWidth(100%, 100%/6);
+	max-width: @media_md_max;
+	margin: auto;
+	padding: 0;
+	float: none !important;
+	
+	header
+	{
+		background-image: url('../img/izzy_banner.jpg');
+		background-size: cover;
+		color: @color_header_font;
+		padding: 15px;
+		padding-right: 100%*(702/2120);
+		
+		> *
+		{
+			margin: 0 2vw;
+		}
+		
+		.titles
+		{
+			font-size: 1.7vw;
+			
+			@media (min-width: @media_lg_min) {
+				font-size: 1.6em;
+			}
+			
+			h1
+			{
+				font-size: 2.6em;
+			}
+			
+			h2
+			{
+				font-size: 1.2em;
+			}
+		}
+		
+		.links
+		{
+			font-size: 1.7vw;
+			position: absolute;
+			bottom: 0;
+			padding: 15px;
+			
+			p, a
+			{
+				color: @color_header_link;
+				text-decoration: none;
+				
+				.onfocus({
+					color: @color_header_font;
+				});
+			}
+		}
+	}
+}
+
+#bodier_container
+{
+	.make-sm-column(12);
+	margin: 0;
+	padding: 0;
+	
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/@color_izzy+0,510016+100 */
+	background: @color_izzy; /* Old browsers */
+	background: -moz-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,@color_izzy), color-stop(100%,@color_maniakk)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* IE10+ */
+	background: linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color_izzy', endColorstr='@color_maniakk',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	
+	#bodier
+	{
+		min-height: 100vh; //TO DELETE
+		max-width: 800px;
+		margin: auto;
+		font-size: 1.2em;
+	}
+}

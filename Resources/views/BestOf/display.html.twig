@@ -1,0 +1,58 @@
+{% extends 'ZzPyroBundle::layout.html.twig' %}
+
+{% trans_default_domain 'ZzPyroBundle_bestof' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{% stylesheets 'bundles/zzpyro/css/bestof.less' filter='cssrewrite' %}
+		<link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block js_lib %}
+	{{ parent() }}
+	{% if bestof.done %}
+		<script src="https://www.youtube.com/iframe_api"></script>
+	{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{% if bestof.done %}
+		<script>
+			var player;
+			function onYouTubeIframeAPIReady () {
+				player = new YT.Player('youtube_player', {
+					videoId: '{{ bestof.video.id }}',
+				});
+			}
+		</script>
+	{% endif %}
+{% endblock %}
+
+{% block bodier %}
+{% autoescape false %}
+	<section id="bestof">
+		<h1>{{ 'bestof' |trans }} {{ bestof.name }}</h1>
+		<p>
+			{{ 'managedBy' |trans({
+				'%user%': '<a href="">' ~ bestof.manager.user.username ~ '</a>',
+				'%date%': bestof.proposalDate |localizeddate('long', 'none')
+			}) }}
+		</p>
+		{% if bestof.done %}
+			<p>
+				{{ 'published' |trans({
+					'%date%': bestof.endDate |localizeddate('long', 'none')
+				}) }}
+			</p>
+			
+			<div id="youtube_player"></div>
+		{% endif %}
+		
+		<h2>{{ 'videos' |trans }}</h2>
+		{% import "ZzPyroBundle:BestOf:list_videos.macro.html.twig" as videos %}
+		{{ videos.list(bestof) }}
+	</section>
+{% endautoescape %}
+{% endblock %}

@@ -8,6 +8,13 @@ use Zz\PyroBundle\Entity\BestOf;
 
 class BestOfController extends Controller
 {
+	public function displayAction ( BestOf $bestof )
+	{
+		return $this->render('ZzPyroBundle:BestOf:display.html.twig', [
+			'bestof' => $bestof
+		]);
+	}
+	
 	public function addAction( Request $request )
 	{
 		$bestof = new BestOf;
