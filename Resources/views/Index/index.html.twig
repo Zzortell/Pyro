@@ -47,13 +47,26 @@
 			<section id="bodier">
 				<section id="content">
 					<article>
-						<h1>Les derniers best-of</h1>
+						<h1>{{ 'content.published' |trans }}</h1>
 					</article>
 					<article>
-						<h1>Objectif de la semaine</h1>
+						<h1>{{ 'content.goal' |trans }}</h1>
 					</article>
-					<article>
-						<h1>Vidéos à couvrir</h1>
+					<article id="article_bestof">
+						<h1>{{ 'content.bestof' |trans }}</h1>
+						{% for bestof in bestofList %}
+							<div>
+								<h2>
+									<a href="">{{ bestof.name }}</a>
+									({{ bestof.manager.user.username }})
+								</h2>
+								<ul>
+									{% for video in bestof.videos %}
+										<li><a href="">{{ video.title }}</a></li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endfor %}
 					</article>
 				</section>
 				<section id="part">

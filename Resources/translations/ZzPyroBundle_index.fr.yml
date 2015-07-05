@@ -4,3 +4,8 @@ header:
     link_yt:    Chaîne Youtube
     link_izzi:  Chaîne d'izziManiakk
     logout:     Se déconnecter
+
+content:
+    published:  Les derniers best-of
+    goal:       Objectif de la semaine
+    bestof:     Prochains best-of

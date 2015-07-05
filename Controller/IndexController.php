@@ -10,6 +10,13 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ZzPyroBundle:Index:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('ZzPyroBundle:BestOf');
+        
+        $bestofList = $repo->findAll();
+        
+        return $this->render('ZzPyroBundle:Index:index.html.twig', [
+        	'bestofList' => $bestofList
+        ]);
     }
 }
