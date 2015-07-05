@@ -2,23 +2,40 @@
 
 body
 {
-	background-color: @color_body;
+	background-color: @color_izzy;
 	font-family: Verdana, sans-serif;
+}
+
+#body_container
+{
+	position: relative;
+	
+	&:before
+	{
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 50%;
+		background-color: #36000F;
+	}
 }
 
 #header_container
 {
 	.make-sm-column(12);
 	.heightPerWidth(100%, 100%/6);
+	max-width: @media_md_max;
+	margin: auto;
 	padding: 0;
+	float: none !important;
 	
 	header
 	{
 		background-image: url('../img/izzy_banner.jpg');
 		background-size: cover;
-		
 		color: @color_header_font;
-		
 		padding: 15px;
 		padding-right: 100%*(702/2120);
 		
@@ -30,6 +47,10 @@ body
 		.titles
 		{
 			font-size: 1.7vw;
+			
+			@media (min-width: @media_lg_min) {
+				font-size: 1.6em;
+			}
 			
 			h1
 			{
@@ -68,21 +89,22 @@ body
 	margin: 0;
 	padding: 0;
 	
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/black+0,510016+100 */
-	background: black; /* Old browsers */
-	background: -moz-linear-gradient(-135deg, black 0%, @color_body 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,black), color-stop(100%,@color_body)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(-135deg, black 0%, @color_body 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(-135deg, black 0%, @color_body 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(-135deg, black 0%, @color_body 100%); /* IE10+ */
-	background: linear-gradient(-135deg, black 0%, @color_body 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='black', endColorstr='@color_body',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/@color_izzy+0,510016+100 */
+	background: @color_izzy; /* Old browsers */
+	background: -moz-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,@color_izzy), color-stop(100%,@color_maniakk)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* IE10+ */
+	background: linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color_izzy', endColorstr='@color_maniakk',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	
 	#bodier
 	{
 		min-height: 100vh; //TO DELETE
 		max-width: 800px;
 		margin: auto;
+		font-size: 1.2em;
 		
 		#content
 		{
@@ -92,28 +114,72 @@ body
 			{
 				background-color: @color_article;
 				padding: 10px;
-				margin: 15px;
+				margin-top: 15px;
 			}
 		}
 		
 		#part
 		{
 			.make-sm-column(3);
-			background-color: @color_part;
-		}
-		
-		.after
-		{
-			content: '';
-			position: absolute !important;
-			top: 0;
-			bottom: 0;
-			z-index: -1;
-			right: 0;
+			background-color: @color_article;
+			text-align: center;
 			
-			background-color: @color_part;
-			.make-sm-column(4);
-			padding: 0;
+			section
+			{
+				margin: 35px 0;
+				
+				h1
+				{
+					font-size: 1.7em;
+				}
+				
+				form
+				{
+					.widget
+					{
+						margin: 10px 0;
+						
+						input
+						{
+							&[type="text"],
+							&[type="email"],
+							&[type="password"]
+							{
+								background-color: @color_maniakk;
+								border: none;
+								margin: 5px 0;
+								padding: 5px 10px;
+								font-size: .8em;
+								color: @color_header_font;
+								
+								&:focus
+								{
+									border: none;
+								}
+							}
+						}
+					}
+					
+					.option
+					{
+						label[for="remember_me"]
+						{
+							font-size: .8em;
+						}
+					}
+					
+					input[type="submit"]
+					{
+						border: none;
+						background-color: @color_maniakk;
+						color: @color_header_font;
+						cursor: pointer;
+						padding: 5px 10px;
+						margin-top: 5px;
+						font-size: .8em;
+					}
+				}
+			}
 		}
 	}
 }
