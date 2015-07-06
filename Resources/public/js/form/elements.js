@@ -11,7 +11,7 @@ jQuery(function($){
 	manageCollections(bestOf.collections);
 	transformVideosUrlToId(bestOf.form, bestOf.collections[1]);
 	
-	//Extract
+	// Extract
 	var extract = {
 		form: 					$('[name="extract"]'),
 		videoSelect: 			$('#extract_video'),

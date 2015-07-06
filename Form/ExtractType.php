@@ -29,10 +29,15 @@ class ExtractType extends AbstractType
 				'multiple' 	=> false,
 				'required' 	=> false
 			])
-			->add('externalVideo', 	'video',
-					[ 'mapped' => false, 'required' => false ])
-			->add('startSeconds', 	'integer', 	[ 'label' => 'form.extract.startSeconds.label' ])
-			->add('endSeconds', 	'integer', 	[ 'label' => 'form.extract.endSeconds.label' ])
+			->add('externalVideo', 	'video', [ 'mapped' => false, 'required' => false ])
+			->add('startSeconds', 	'text', 	[
+				'label' => 'form.extract.startSeconds.label',
+				'attr' 	=> [ 'class' => 'seconds' ]
+			])
+			->add('endSeconds', 	'text', 	[
+				'label' => 'form.extract.endSeconds.label',
+				'attr' 	=> [ 'class' => 'seconds' ]
+			])
 			->add('save', 			'submit', 	[ 'label' => 'form.save' ])
             ->addEventListener( FormEvents::SUBMIT, [ $this, 'onSubmit' ] )
 		;

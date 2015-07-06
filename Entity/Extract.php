@@ -168,7 +168,7 @@ class Extract
      */
     public function setStartSeconds($startSeconds)
     {
-        $this->startSeconds = $startSeconds;
+        $this->startSeconds = (int) $startSeconds;
 
         return $this;
     }
@@ -192,7 +192,7 @@ class Extract
      */
     public function setEndSeconds($endSeconds)
     {
-        $this->endSeconds = $endSeconds;
+        $this->endSeconds = (int) $endSeconds;
 
         return $this;
     }

@@ -17,7 +17,7 @@ function transformVideoUrlToId ( form, text, label ) {
 			) {
 				e.preventDefault();
 				
-				alert('Can\'t get the Youtube video\'s id. Please put a valid video url.');
+				warn('Can\'t get the Youtube video\'s id. Please put a valid video url.');
 			}
 			
 			text.val( url.parameters.v );
@@ -25,4 +25,41 @@ function transformVideoUrlToId ( form, text, label ) {
 	});
 	
 	label.text('Url');
+}
+
+function transformSecondsToInt ( form, text ) {
+	form.on('submit', function ( e ) {
+		matches = text.val().match(/^(?:(?:(\d+):)?([0-5]\d):)?([0-5]\d)$/)
+		
+		if ( matches !== null ) {
+			console.log(matches);
+			seconds = parseInt(matches[3]);
+			minutes = parseInt(matches[2]);
+			hours = parseInt(matches[1]);
+			
+			time = ((hours||0)*60 + (minutes||0))*60 + seconds;
+		} else {
+			e.preventDefault();
+			
+			warn('Invalid time format. A valid format is HH:MM:SS');
+		}
+	});
+	
+	text.val('00:00');
+}
+
+function formatIntToSeconds ( time ) {
+	hours = Math.floor(time/3600);
+	time %= 3600;
+	minutes = Math.floor(time/60);
+	time %= 60;
+	seconds = Math.floor(time);
+	
+	return (hours ? (hours < 10 ? '0' : '') + hours + ':' : '')
+			+ (minutes < 10 ? '0' : '') + minutes + ':'
+			+ (seconds < 10 ? '0' : '') + seconds;
+}
+
+function warn ( message ) {
+	alert(message);
 }
