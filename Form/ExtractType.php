@@ -31,9 +31,9 @@ class ExtractType extends AbstractType
 			])
 			->add('externalVideo', 	'video',
 					[ 'mapped' => false, 'required' => false ])
-			->add('startSeconds', 	'integer')
-			->add('endSeconds', 	'integer')
-			->add('save', 			'submit')
+			->add('startSeconds', 	'integer', 	[ 'label' => 'form.extract.startSeconds.label' ])
+			->add('endSeconds', 	'integer', 	[ 'label' => 'form.extract.endSeconds.label' ])
+			->add('save', 			'submit', 	[ 'label' => 'form.save' ])
             ->addEventListener( FormEvents::SUBMIT, [ $this, 'onSubmit' ] )
 		;
 	}
@@ -66,7 +66,8 @@ class ExtractType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'Zz\PyroBundle\Entity\Extract'
+			'data_class' => 'Zz\PyroBundle\Entity\Extract',
+			'translation_domain' => 'ZzPyroBundle_form'
 		));
 	}
 
