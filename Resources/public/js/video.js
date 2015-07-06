@@ -78,7 +78,7 @@ jQuery(function($){
 				$(this).attr('captured', '');
 			});
 			
-			capture.parent().css('text-align', 'right');
+			capture.parent().addClass('seconds_container');
 		});
 		
 		//DEV
