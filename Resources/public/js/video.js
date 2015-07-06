@@ -10,7 +10,7 @@ jQuery(function($){
 			e.preventDefault();
 			
 			var id = this.id;
-			video_more = $(prototype.html().replace(/__id__/g, id));
+			var video_more = $(prototype.html().replace(/__id__/g, id));
 			videos.parent().after(video_more);
 			
 			var player;
@@ -18,7 +18,10 @@ jQuery(function($){
 				player = new YT.Player('youtube_player_video_' + id, {
 					videoId: id,
 				});
-			
+				
+				/* FIRST METHOD: check time every second
+				 * PB: latency
+				 */
 				// Listen player stateChange
 				var timerId;
 				
@@ -34,8 +37,20 @@ jQuery(function($){
 					$('.capture:not([captured])').trigger('click').removeAttr('captured');
 					
 					timerId = setTimeout(onPlaying, 1000);
-					console.log('captured!');
 				}
+				
+				/* SECOND METHOD: listen HTML5 video's event
+				 * PB: same-origin policy
+				 *
+				 * Solution: it could work with a player like popcorn.js
+				 * http://popcornjs.org/popcorn-with-youtube
+				 * http://popcornjs.org/popcorn-docs/events/#timeupdate
+				var video = video_more.find('iframe').get().contentWindow.document.find('video');
+				video.on('timeupdate', function () {
+					console.log('captured!');
+					$('.capture:not([captured])').trigger('click').removeAttr('captured');
+				});
+				 */
 			});
 			
 			// Handle seonds fields submittion
@@ -56,7 +71,10 @@ jQuery(function($){
 			
 			var capture = $('.capture');
 			capture.on('click', function () {
-				$('#' + $(this).attr('for')).val(formatIntToSeconds(player.getCurrentTime()));
+				var id = $(this).attr('for');
+				$('#' + id).val(
+					formatIntToSeconds(player.getCurrentTime(), id.indexOf('end') !== -1)
+				);
 				$(this).attr('captured', '');
 			});
 			

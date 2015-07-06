@@ -29,15 +29,16 @@ function transformVideoUrlToId ( form, text, label ) {
 
 function transformSecondsToInt ( form, text ) {
 	form.on('submit', function ( e ) {
-		matches = text.val().match(/^(?:(?:(\d+):)?([0-5]\d):)?([0-5]\d)$/)
+		var matches = text.val().match(/^(?:(?:(\d+):)?([0-5]\d):)?([0-5]\d)$/)
 		
 		if ( matches !== null ) {
-			console.log(matches);
-			seconds = parseInt(matches[3]);
-			minutes = parseInt(matches[2]);
-			hours = parseInt(matches[1]);
+			var seconds = parseInt(matches[3]),
+				minutes = parseInt(matches[2]),
+				hours 	= parseInt(matches[1])
+			;
 			
-			time = ((hours||0)*60 + (minutes||0))*60 + seconds;
+			var time = ((hours||0)*60 + (minutes||0))*60 + seconds;
+			text.val(time);
 		} else {
 			e.preventDefault();
 			
@@ -48,12 +49,16 @@ function transformSecondsToInt ( form, text ) {
 	text.val('00:00');
 }
 
-function formatIntToSeconds ( time ) {
+function formatIntToSeconds ( time, ceil ) {
 	hours = Math.floor(time/3600);
 	time %= 3600;
 	minutes = Math.floor(time/60);
 	time %= 60;
-	seconds = Math.floor(time);
+	if ( ceil ) {
+		seconds = Math.ceil(time);
+	} else {
+		seconds = Math.floor(time);
+	}
 	
 	return (hours ? (hours < 10 ? '0' : '') + hours + ':' : '')
 			+ (minutes < 10 ? '0' : '') + minutes + ':'

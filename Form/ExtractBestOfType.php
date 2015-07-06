@@ -39,7 +39,6 @@ class ExtractBestOfType extends AbstractType
     {
         $extract = $e->getData();
         $form = $e->getForm();
-        dump($form);
         
         $videoId = $form->get('video')->getData();
         
