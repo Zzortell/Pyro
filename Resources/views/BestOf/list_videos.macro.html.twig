@@ -1,3 +1,5 @@
+{% trans_default_domain 'ZzPyroBundle_bestof' %}
+
 {% macro list ( bestof ) %}
 	<ul class="video_list">
 		{% for video in bestof.videos %}
@@ -6,8 +8,14 @@
 		<template>
 			<section class="video_more">
 				<div id="youtube_player_video___id__"></div>
+				
 				<h1>Proposer un extrait</h1>
-				{% include 'ZzPyroBundle:Form:extract.html.twig' %}
+				{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+					<p>{{ 'extract.not_auth' |trans }}</p>
+				{% else %}
+					{{ render(controller('ZzPyroBundle:BestOf:extract',
+						{ 'id': bestof.id })) }}
+				{% endif %}
 			</section>
 		</template>
 	</ul>

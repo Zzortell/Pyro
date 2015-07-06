@@ -43,6 +43,10 @@ class ExtractType extends AbstractType
         $data = $e->getData();
         $form = $e->getForm();
         
+        if ( !$form->offsetExists('externalVideo') ) {
+        	return;
+        }
+        
         $externalVideo = $form->get('externalVideo')->getData();
         
         if ( !($data->getVideo() || $externalVideo) ) {

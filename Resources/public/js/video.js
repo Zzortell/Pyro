@@ -10,7 +10,7 @@ jQuery(function($){
 			e.preventDefault();
 			
 			var id = this.id;
-			video_more = $(prototype.html().replace('__id__', id));
+			video_more = $(prototype.html().replace(/__id__/g, id));
 			videos.parent().after(video_more);
 			
 			var player;

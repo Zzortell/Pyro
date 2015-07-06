@@ -2,3 +2,6 @@ bestof:     Best-Of :
 managedBy:  Proposé par %user% le %date%
 published:  Publié le %date%
 videos:     Vidéos
+
+extract:
+    not_auth: Vous devez être authentifié pour proposer un extrait.

@@ -39,6 +39,12 @@ services:
         tags:
             - { name: form.type, alias: bestof }
 
+    zz_pyro.form.bestof_extract:
+        class: Zz\PyroBundle\Form\ExtractBestOfType
+        arguments: [@zz_pyro.repo.video]
+        tags:
+            - { name: form.type, alias: bestof_extract }
+
     zz_pyro.repo.channel:
         class: Zz\PyroBundle\Entity\ChannelRepository
         factory_service: doctrine.orm.default_entity_manager

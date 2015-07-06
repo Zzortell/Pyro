@@ -4,6 +4,12 @@ zz_pyro_bestof_display:
     requirements:
         id: \d+
 
+zz_pyro_bestof_extract:
+    path:     /{id}/extract
+    defaults: { _controller: ZzPyroBundle:BestOf:extract }
+    requirements:
+        id: \d+
+
 zz_pyro_bestof_add:
     path:     /add
     defaults: { _controller: ZzPyroBundle:BestOf:add }
