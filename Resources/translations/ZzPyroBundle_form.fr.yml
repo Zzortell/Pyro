@@ -4,5 +4,5 @@ form:
         bestof.label:           Best-Of
         video.label:            Vidéo
         externalVideo.label:    ou
-        startSeconds.label:     De la seconde
-        endSeconds.label:       À la seconde
+        startSeconds.label:     Début :
+        endSeconds.label:       Fin :

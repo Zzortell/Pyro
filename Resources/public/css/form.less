@@ -1,8 +1,5 @@
-section.form_container
+.form_container
 {
-	margin: 35px 0;
-	width: 210px;
-	
 	h1
 	{
 		font-size: 1.7em;
@@ -13,25 +10,31 @@ section.form_container
 		.widget
 		{
 			margin: 10px 0;
+		}
+		
+		label
+		{
+			padding-right: 10px;
+		}
+		
+		input,
+		[type="submit"]
+		{
+			border: none;
+			background-color: @color_maniakk;
+			color: @color_header_font;
+			font-size: .8em;
+		}
+		
+		input
+		{
+			margin: 5px 0;
+			padding: 5px 10px;
 			
-			input
+			&[type="text"],
+			&[type="email"],
+			&[type="password"]
 			{
-				&[type="text"],
-				&[type="email"],
-				&[type="password"]
-				{
-					background-color: @color_maniakk;
-					border: none;
-					margin: 5px 0;
-					padding: 5px 10px;
-					font-size: .8em;
-					color: @color_header_font;
-					
-					&:focus
-					{
-						border: none;
-					}
-				}
 			}
 		}
 		
@@ -43,15 +46,11 @@ section.form_container
 			}
 		}
 		
-		input[type="submit"]
+		[type="submit"]
 		{
-			border: none;
-			background-color: @color_maniakk;
-			color: @color_header_font;
 			cursor: pointer;
 			padding: 5px 10px;
 			margin-top: 5px;
-			font-size: .8em;
 		}
 	}
 }
