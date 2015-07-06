@@ -15,16 +15,19 @@
 	{{ parent() }}
 	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="{{ asset('bundles/zzpyro/js/lib/urlobject.js') }}"></script>
-	<script src="{{ asset('bundles/zzpyro/js/lib/jquery_regex_selector.js') }}"></script>
+	<script src="{{ asset('bundles/zzpyro/js/lib/jquery.regex_selector.js') }}"></script>
+	<script src="{{ asset('bundles/zzpyro/js/lib/jquery.findby.js') }}"></script>
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
-	<script src="{{ asset('bundles/zzpyro/js/form/collections.js') }}"></script>
 	<script src="{{ asset('bundles/zzpyro/js/form/select_or_text.js') }}"></script>
+	<script src="{{ asset('bundles/zzpyro/js/form/collections.js') }}"></script>
 	<script src="{{ asset('bundles/zzpyro/js/form/transform.js') }}"></script>
 	<script src="{{ asset('bundles/zzpyro/js/form/elements.js') }}"></script>
+	<script src="{{ asset('bundles/zzpyro/js/form/control.js') }}"></script>
 	<script src="{{ asset('bundles/zzpyro/js/user.js') }}"></script>
+	<script src="{{ asset('bundles/zzpyro/js/ajax.js') }}"></script>
 {% endblock %}
 
 {% block body %}

@@ -1,5 +1,5 @@
 jQuery(function($){
-	var videoList = $('.video_list');
+	var videoList = $('.video_list'), player;
 	
 	if ( videoList.length ) {
 		var prototype 	= videoList.find('template'),
@@ -13,7 +13,6 @@ jQuery(function($){
 			var video_more = $(prototype.html().replace(/__id__/g, id));
 			videos.parent().after(video_more);
 			
-			var player;
 			listenYt(function () {
 				player = new YT.Player('youtube_player_video_' + id, {
 					videoId: id,
@@ -53,35 +52,37 @@ jQuery(function($){
 				 */
 			});
 			
-			// Handle seonds fields submittion
-			var form 	= $('[name="bestof_extract"]'),
-				seconds = form.find('.seconds');
-			;
-			
-			seconds.each(function () {
-				transformSecondsToInt(form, $(this));
-			});
-			
-			// Add capture buttons
-			seconds.each(function () {
-				$(this).after($(
-					'<button type="button" class="capture" for="' + this.id + '">Capturer</button>'
-				));
-			});
-			
-			var capture = $('.capture');
-			capture.on('click', function () {
-				var id = $(this).attr('for');
-				$('#' + id).val(
-					formatIntToSeconds(player.getCurrentTime(), id.indexOf('end') !== -1)
-				);
-				$(this).attr('captured', '');
-			});
-			
-			capture.parent().addClass('seconds_container');
+			// Control form submittion
+			var form = $('[name="bestof_extract"]');
+			controlForm(form, controlExtractForm);
 		});
 		
 		//DEV
 		videos.trigger('click');
+	}
+	
+	function controlExtractForm ( form ) {
+		// Handle seonds fields submittion
+		var seconds = form.find('.seconds');
+		
+		seconds.each(function () {
+			transformSecondsToInt(form, $(this));
+		});
+		
+		// Add capture buttons
+		seconds.each(function () {
+			$(this).after($(
+				'<button type="button" class="capture" for="' + this.id + '">Capturer</button>'
+			));
+		});
+		
+		var capture = $('.capture');
+		capture.on('click', function () {
+			var id = $(this).attr('for');
+			$('#' + id).val(
+				formatIntToSeconds(player.getCurrentTime(), id.indexOf('end') !== -1)
+			);
+			$(this).attr('captured', '');
+		});
 	}
 });
