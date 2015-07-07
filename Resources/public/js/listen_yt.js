@@ -5,9 +5,9 @@ function onYouTubeIframeAPIReady () {
 	jQuery('html').trigger('ready.yt');
 }
 
-function listenYt ( callback ) {
+function listenYt ( callback, args ) {
 	if ( isYtReady ) {
-		callback();
+		callback.apply(null, args);
 	} else {
 		jQuery('html').on('ready.yt', callback);
 	}

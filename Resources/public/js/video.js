@@ -1,5 +1,5 @@
 jQuery(function($){
-	var videoList = $('.video_list'), player;
+	var videoList = $('.video_list');
 	
 	if ( videoList.length ) {
 		var prototype 	= videoList.find('template'),
@@ -10,58 +10,49 @@ jQuery(function($){
 			e.preventDefault();
 			
 			var id = this.id;
-			var video_more = $(prototype.html().replace(/__id__/g, id));
-			videos.parent().after(video_more);
+			var video_more = $('.video_more');
+			video_more.css('display', 'none');
+			video_more = video_more.filterBy('for', id);
 			
-			listenYt(function () {
-				player = new YT.Player('youtube_player_video_' + id, {
-					videoId: id,
-				});
+			if ( video_more.length === 0 ) {
+				video_more = $(prototype.html().replace(/__id__/g, id));
+				video_more.attr('for', id);
+				$(this).parent().after(video_more);
 				
-				/* FIRST METHOD: check time every second
-				 * PB: latency
-				 */
-				// Listen player stateChange
-				var timerId;
-				
-				player.addEventListener('onStateChange', function ( e ) {
-					if ( e.data === YT.PlayerState.PLAYING ) {
-						onPlaying();
-					} else {
-						clearTimeout(timerId);
+				listenYt(function () {
+					var player = new YT.Player('youtube_player_video_' + id, {
+						videoId: id,
+					});
+			
+					// Control form submittion
+					var form = video_more.find('[name="bestof_extract"]');
+					controlForm(form, controlExtractForm, [ player ]);
+					
+					// Listen player stateChange
+					var timerId;
+					
+					player.addEventListener('onStateChange', function ( e ) {
+						if ( e.data === YT.PlayerState.PLAYING ) {
+							onPlaying();
+						} else {
+							clearTimeout(timerId);
+						}
+					});
+					
+					function onPlaying () {
+						form.find('.capture:not([captured])').trigger('click').removeAttr('captured');
+						
+						timerId = setTimeout(onPlaying, 1000);
 					}
 				});
-				
-				function onPlaying () {
-					$('.capture:not([captured])').trigger('click').removeAttr('captured');
-					
-					timerId = setTimeout(onPlaying, 1000);
-				}
-				
-				/* SECOND METHOD: listen HTML5 video's event
-				 * PB: same-origin policy
-				 *
-				 * Solution: it could work with a player like popcorn.js
-				 * http://popcornjs.org/popcorn-with-youtube
-				 * http://popcornjs.org/popcorn-docs/events/#timeupdate
-				var video = video_more.find('iframe').get().contentWindow.document.find('video');
-				video.on('timeupdate', function () {
-					console.log('captured!');
-					$('.capture:not([captured])').trigger('click').removeAttr('captured');
-				});
-				 */
-			});
-			
-			// Control form submittion
-			var form = $('[name="bestof_extract"]');
-			controlForm(form, controlExtractForm);
+			} else {
+				video_more.css('display', 'block');
+			}
 		});
-		
-		//DEV
-		videos.trigger('click');
 	}
 	
-	function controlExtractForm ( form ) {
+	function controlExtractForm ( player ) {
+		var form = this;
 		// Handle seonds fields submittion
 		var seconds = form.find('.seconds');
 		
@@ -76,10 +67,10 @@ jQuery(function($){
 			));
 		});
 		
-		var capture = $('.capture');
+		var capture = form.find('.capture');
 		capture.on('click', function () {
 			var id = $(this).attr('for');
-			$('#' + id).val(
+			$(this).siblings('#' + id).val(
 				formatIntToSeconds(player.getCurrentTime(), id.indexOf('end') !== -1)
 			);
 			$(this).attr('captured', '');

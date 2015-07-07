@@ -1,5 +1,5 @@
-function controlForm ( form, callback ) {
-	callback(form);
+function controlForm ( form, callback, args ) {
+	callback.apply(form, args);
 	
 	form.on('submit', function ( e ) {
 		e.preventDefault();
@@ -21,7 +21,7 @@ function controlForm ( form, callback ) {
 		
 		var newForm = response.filter('form');
 		newForm.each(function () {
-			controlForm($(this), callback);
+			controlForm($(this), callback, args);
 		});
 	}
 }
