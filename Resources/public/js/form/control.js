@@ -1,4 +1,6 @@
 function controlForm ( form, callback ) {
+	callback(form);
+	
 	form.on('submit', function ( e ) {
 		e.preventDefault();
 		
@@ -14,11 +16,12 @@ function controlForm ( form, callback ) {
 	});
 	
 	function processResponse ( response, status ) {
-		newForm = $(response).filterBy('name', form.attr('name'));
-		form.replaceWith(newForm);
+		response = $(response);
+		form.replaceWith(response);
 		
-		controlForm(newForm, callback);
+		var newForm = response.filter('form');
+		newForm.each(function () {
+			controlForm($(this), callback);
+		});
 	}
-	
-	callback(form);
 }

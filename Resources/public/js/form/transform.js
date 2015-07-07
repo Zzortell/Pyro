@@ -40,7 +40,7 @@ function transformSecondsToInt ( form, text ) {
 		}
 	});
 	
-	if ( !text.val() ) {
+	if ( !parseInt(text.val()) ) {
 		text.val('00:00');
 	}
 }
