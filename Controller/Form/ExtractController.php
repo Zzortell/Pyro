@@ -1,6 +1,6 @@
 <?php
 
-namespace Zz\PyroBundle\Controller;
+namespace Zz\PyroBundle\Controller\Form;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,7 @@ class ExtractController extends Controller
 		$extract->setAuthor($this->get('zz_pyro.profile_manager')->getProfile());
 		
 		$form = $this->createForm('extract', $extract, [
-			'action' => $this->generateUrl('zz_pyro_extract_add')
+			'action' => $this->generateUrl('zz_pyro_form_extract_add')
 		]);
 		
 		if ( $form->handleRequest($request)->isValid() ) {

@@ -17,7 +17,7 @@
 					{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 						<p>{{ 'extract.not_auth' |trans }}</p>
 					{% else %}
-						{{ render(controller('ZzPyroBundle:BestOf:extract',
+						{{ render(controller('ZzPyroBundle:Form/BestOf:extract',
 							{ 'id': bestof.id })) }}
 					{% endif %}
 				</section>

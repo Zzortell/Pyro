@@ -1,0 +1,11 @@
+zz_pyro_form_extract:
+    resource: "@ZzPyroBundle/Resources/config/routing/form/extract.yml"
+    prefix:   /extract
+
+zz_pyro_form_bestof:
+    resource: "@ZzPyroBundle/Resources/config/routing/form/bestof.yml"
+    prefix:   /bestof
+
+zz_pyro_video:
+    resource: "@ZzPyroBundle/Resources/config/routing/form/video.yml"
+    prefix:   /video

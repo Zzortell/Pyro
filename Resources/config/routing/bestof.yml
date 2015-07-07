@@ -7,9 +7,3 @@ zz_pyro_bestof_display:
 zz_pyro_bestof_add:
     path:     /add
     defaults: { _controller: ZzPyroBundle:BestOf:add }
-
-zz_pyro_bestof_extract:
-    path:     /{id}/extract
-    defaults: { _controller: ZzPyroBundle:BestOf:extract }
-    requirements:
-        id: \d+

@@ -1,3 +1,0 @@
-zz_pyro_extract_add:
-    path:     /add
-    defaults: { _controller: ZzPyroBundle:Extract:add }

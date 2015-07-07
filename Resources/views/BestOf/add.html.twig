@@ -1,0 +1,18 @@
+{% extends 'ZzPyroBundle::layout.html.twig' %}
+
+{% trans_default_domain 'ZzPyroBundle_bestof' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{% stylesheets 'bundles/zzpyro/css/bestof.less' filter='cssrewrite' %}
+		<link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block bodier %}
+{% autoescape false %}
+	<section id="bestof">
+		
+	</section>
+{% endautoescape %}
+{% endblock %}

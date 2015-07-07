@@ -2,14 +2,10 @@ zz_pyro_homepage:
     path:     /
     defaults: { _controller: ZzPyroBundle:Index:index }
 
-zz_pyro_extract:
-    resource: "@ZzPyroBundle/Resources/config/routing/extract.yml"
-    prefix:   /extract
-
-zz_pyro_video:
-    resource: "@ZzPyroBundle/Resources/config/routing/video.yml"
-    prefix:   /video
-
 zz_pyro_bestof:
     resource: "@ZzPyroBundle/Resources/config/routing/bestof.yml"
     prefix:   /bestof
+
+zz_pyro_form:
+    resource: "@ZzPyroBundle/Resources/config/routing/form.yml"
+    prefix:   /form

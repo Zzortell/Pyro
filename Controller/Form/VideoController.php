@@ -1,12 +1,10 @@
 <?php
 
-namespace Zz\PyroBundle\Controller;
+namespace Zz\PyroBundle\Controller\Form;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Zz\PyroBundle\Entity\Video;
-use Zz\PyroBundle\Form\VideoType;
-use Symfony\Component\Form\FormError;
 
 class VideoController extends Controller
 {
@@ -15,7 +13,7 @@ class VideoController extends Controller
 		$video = new Video;
 		
 		$form = $this->createForm('video_add', $video, [
-			'action' => $this->generateUrl('zz_pyro_video_add')
+			'action' => $this->generateUrl('zz_pyro_form_video_add')
 		]);
 		
 		$form->handleRequest($request);

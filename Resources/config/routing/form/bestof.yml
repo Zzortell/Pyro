@@ -1,0 +1,9 @@
+zz_pyro_form_bestof_add:
+    path:     /add
+    defaults: { _controller: ZzPyroBundle:Form/BestOf:add }
+
+zz_pyro_form_bestof_extract:
+    path:     /{id}/extract
+    defaults: { _controller: ZzPyroBundle:Form/BestOf:extract }
+    requirements:
+        id: \d+
