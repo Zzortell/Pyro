@@ -1,25 +1,29 @@
 {% trans_default_domain 'ZzPyroBundle_bestof' %}
 
 {% macro list ( bestof ) %}
-	<ul class="video_list">
-		{% for video in bestof.videos %}
-			<li>
-				<a href="{{ path('zz_pyro_bestof_display', { 'id': bestof.id }) }}#{{ video.id }}"
-				   class="video" id="{{ video.id }}">{{ video.title }}</a>
-			</li>
-		{% endfor %}
-		<template>
-			<section class="video_more form_container">
-				<div id="youtube_player_video___id__"></div>
-				
-				<h1>Proposer un extrait</h1>
-				{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-					<p>{{ 'extract.not_auth' |trans }}</p>
-				{% else %}
-					{{ render(controller('ZzPyroBundle:BestOf:extract',
-						{ 'id': bestof.id })) }}
-				{% endif %}
-			</section>
-		</template>
-	</ul>
+	{% if bestof.videos |length > 0 %}
+		<ul class="video_list">
+			{% for video in bestof.videos %}
+				<li>
+					<a href="{{ path('zz_pyro_bestof_display', { 'id': bestof.id }) }}#{{ video.id }}"
+					   class="video" id="{{ video.id }}">{{ video.title }}</a>
+				</li>
+			{% endfor %}
+			<template>
+				<section class="video_more form_container">
+					<div id="youtube_player_video___id__"></div>
+					
+					<h1>Proposer un extrait</h1>
+					{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+						<p>{{ 'extract.not_auth' |trans }}</p>
+					{% else %}
+						{{ render(controller('ZzPyroBundle:BestOf:extract',
+							{ 'id': bestof.id })) }}
+					{% endif %}
+				</section>
+			</template>
+		</ul>
+	{% else %}
+		<p class="meta">{{ 'none' |trans }}</p>
+	{% endif %}
 {% endmacro %}
