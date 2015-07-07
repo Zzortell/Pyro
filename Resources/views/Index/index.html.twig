@@ -13,13 +13,14 @@
 {% spaceless %}
 	<section id="content">
 		<article>
-			<h1>{{ 'content.published' |trans }}</h1>
+			<h1>{{ 'published' |trans }}</h1>
 		</article>
 		<article>
-			<h1>{{ 'content.goal' |trans }}</h1>
+			<h1>{{ 'goal' |trans }}</h1>
 		</article>
 		<article id="article_bestof">
-			<h1>{{ 'content.bestof' |trans }}</h1>
+			<h1>{{ 'bestof' |trans }}</h1>
+			
 			{% for bestof in bestofList %}
 				<div>
 					<h2>
@@ -32,6 +33,11 @@
 					{{ videos.list(bestof) }}
 				</div>
 			{% endfor %}
+			<p>
+				<a href="{{ path('zz_pyro_bestof_add') }}" class="button">
+					{{ 'add_bestof' |trans }}
+				</a>
+			</p>
 		</article>
 	</section>
 	<section id="part">
