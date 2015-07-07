@@ -5,57 +5,54 @@
 		font-size: 1.7em;
 	}
 	
-	form
+	.widget
 	{
-		.widget
-		{
-			margin: 10px 0;
-		}
+		margin: 10px 0;
+	}
+	
+	label
+	{
+		padding-right: 10px;
+	}
+	
+	input, button
+	{
+		border: none;
+		background-color: @color_maniakk;
+		color: @color_header_font;
+		font-size: .8em;
+	}
+	
+	input
+	{
+		margin: 5px 0;
+		padding: 5px 10px;
 		
-		label
+		&[type="text"],
+		&[type="email"],
+		&[type="password"]
 		{
-			padding-right: 10px;
 		}
-		
-		input, button
+	}
+	
+	.option
+	{
+		label[for="remember_me"]
 		{
-			border: none;
-			background-color: @color_maniakk;
-			color: @color_header_font;
 			font-size: .8em;
 		}
-		
-		input
-		{
-			margin: 5px 0;
-			padding: 5px 10px;
-			
-			&[type="text"],
-			&[type="email"],
-			&[type="password"]
-			{
-			}
-		}
-		
-		.option
-		{
-			label[for="remember_me"]
-			{
-				font-size: .8em;
-			}
-		}
-		
-		input[type="submit"], button
-		{
-			cursor: pointer;
-			padding: 5px 10px;
-			margin: 0 10px;
-			margin-top: 5px;
-		}
-		
-		.form_errors
-		{
-			background-color: red;
-		}
+	}
+	
+	input[type="submit"], button
+	{
+		cursor: pointer;
+		padding: 5px 10px;
+		margin: 0 10px;
+		margin-top: 5px;
+	}
+	
+	.form_errors
+	{
+		background-color: red;
 	}
 }

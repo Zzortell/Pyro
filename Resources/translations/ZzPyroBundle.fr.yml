@@ -9,3 +9,9 @@ header:
 
 entity:
     confirmation: L'entité a été ajoutée.
+
+form:
+    confirm:    Votre proposition a bien été ajoutée.
+
+    extract:
+        resubmit: Soumettre un nouvel extrait

@@ -18,9 +18,6 @@ class BestOfController extends Controller
 		]);
 	}
 	
-	/**
-	 * @ParamConverter("bestof", options={"mapping": {"id": "id"}})
-	 */
 	public function extractAction ( Request $request, BestOf $bestof )
 	{
 		$extract = new Extract;
@@ -29,8 +26,10 @@ class BestOfController extends Controller
 			->setBestOf($bestof)
 		;
 		
+		$path = $this->generateUrl('zz_pyro_bestof_extract', [ 'id' => $bestof->getId() ]);
+		
 		$form = $this->createForm('bestof_extract', $extract, [
-			'action' => $this->generateUrl('zz_pyro_bestof_extract', [ 'id' => $bestof->getId() ])
+			'action' => $path
 		]);
 		
 		if ( $form->handleRequest($request)->isValid() ) {
@@ -38,10 +37,12 @@ class BestOfController extends Controller
 			$em->persist($extract);
 			$em->flush();
 
-			return $this->render('ZzPyroBundle:Entity:confirm.html.twig');
+			return $this->render('ZzPyroBundle:Form:confirm.html.twig', [
+				'path' => $path
+			]);
 		}
 		
-		return $this->render('ZzPyroBundle:Entity:form.html.twig', [
+		return $this->render('ZzPyroBundle:Form:form.html.twig', [
 			'form' => $form->createView()
 		]);
 	}

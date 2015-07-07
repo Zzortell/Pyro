@@ -16,12 +16,23 @@ function controlForm ( form, callback, args ) {
 	});
 	
 	function processResponse ( response, status ) {
-		response = $(response);
+		response = $(response.replace('__id__', form.parent().attr('for')));
 		form.replaceWith(response);
 		
 		var newForm = response.filter('form');
 		newForm.each(function () {
 			controlForm($(this), callback, args);
+		});
+		
+		var confirm = response.filter('.form_confirm');
+		form = confirm;
+		confirm.children('#resubmit').on('click', function () {
+			$.ajax({
+				url:		$(this).attr('path'),
+				type:		'GET',
+				success: 	processResponse,
+				error: 		handleAjaxError
+			});
 		});
 	}
 }

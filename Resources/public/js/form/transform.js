@@ -31,7 +31,6 @@ function transformSecondsToInt ( form, text ) {
 	form.on('submit', function ( e ) {
 		var time = formatSecondsToInt(text.val());
 		if ( time !== false ) {
-			console.log(time);
 			text.val(time);
 		} else {
 			e.preventDefault();
