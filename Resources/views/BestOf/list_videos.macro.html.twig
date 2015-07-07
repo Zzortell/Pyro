@@ -3,7 +3,10 @@
 {% macro list ( bestof ) %}
 	<ul class="video_list">
 		{% for video in bestof.videos %}
-			<li><a href="#" class="video" id="{{ video.id }}">{{ video.title }}</a></li>
+			<li>
+				<a href="{{ path('zz_pyro_bestof_display', { 'id': bestof.id }) }}#{{ video.id }}"
+				   class="video" id="{{ video.id }}">{{ video.title }}</a>
+			</li>
 		{% endfor %}
 		<template>
 			<section class="video_more form_container">
