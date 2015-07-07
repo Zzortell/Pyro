@@ -33,8 +33,13 @@
 {% block bodier %}
 {% autoescape false %}
 	<section id="bestof">
-		<h1>{{ 'bestof' |trans }} {{ bestof.name }}</h1>
-		<p>
+		<h1>
+			{{ 'bestof' |trans }}
+			<a href="{{ path('zz_pyro_bestof_display', { 'id': bestof.id }) }}">
+				{{ bestof.name }}
+			</a>
+		</h1>
+		<p class="meta">
 			{{ 'managedBy' |trans({
 				'%user%': '<a href="">' ~ bestof.manager.user.username ~ '</a>',
 				'%date%': bestof.proposalDate |localizeddate('long', 'none')

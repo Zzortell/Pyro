@@ -13,6 +13,12 @@ h1, h2, h3, h4, h5, h6
 	font-weight: normal;
 }
 
+a
+{
+	color: @color_link;
+	text-decoration: none;
+}
+
 @media_lg_min: 1501px;
 @media_md_max: @media_lg_min - 1;
 
@@ -128,6 +134,12 @@ body
 		max-width: 800px;
 		margin: auto;
 		font-size: 1.2em;
+	
+		.meta
+		{
+			font-size: .8em;
+			font-style: italic;
+		}
 	}
 }
 

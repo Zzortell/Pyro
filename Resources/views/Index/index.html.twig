@@ -26,7 +26,7 @@
 						<a href="{{ path('zz_pyro_bestof_display', { 'id': bestof.id }) }}">
 							{{ bestof.name }}
 						</a>
-						({{ bestof.manager.user.username }})
+						(<a href="#" class="meta">{{ bestof.manager.user.username }}</a>)
 					</h2>
 					{% import "ZzPyroBundle:BestOf:list_videos.macro.html.twig" as videos %}
 					{{ videos.list(bestof) }}
