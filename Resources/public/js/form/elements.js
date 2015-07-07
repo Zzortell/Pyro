@@ -9,6 +9,7 @@ jQuery(function($){
 	};
 	
 	manageCollections(bestOf.collections);
+	transformChannelsUrlToId(bestOf.form, bestOf.collections[0]);
 	transformVideosUrlToId(bestOf.form, bestOf.collections[1]);
 	
 	// Extract

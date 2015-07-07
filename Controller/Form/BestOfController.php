@@ -26,7 +26,7 @@ class BestOfController extends Controller
 			return $this->render('ZzPyroBundle:Form:confirm.html.twig');
 		}
 		
-		return $this->render('ZzPyroBundle:Form:form.html.twig', [
+		return $this->render('ZzPyroBundle:Form:bestof_add.html.twig', [
 			'form' => $form->createView()
 		]);
 	}

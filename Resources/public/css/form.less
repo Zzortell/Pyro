@@ -11,12 +11,28 @@
 	margin: 10px 0;
 }
 
+.form_sub
+{
+	border: solid @color_maniakk 2px;
+	margin: 10px;
+	padding: 10px;
+	
+	[data-prototype] > .form_row > *
+	{
+		// border: solid @color_maniakk 2px;
+		// margin: 4px;
+		// padding: 3px;
+		
+		display: inline-block;
+	}
+}
+
 label
 {
 	padding-right: 10px;
 }
 
-input, button, .button
+input, button, .button, select
 {
 	display: inline-block;
 	border: none;
@@ -25,16 +41,11 @@ input, button, .button
 	font-size: .8em;
 }
 
-input
+input, select
 {
 	margin: 5px 0;
 	padding: 5px 10px;
-	
-	&[type="text"],
-	&[type="email"],
-	&[type="password"]
-	{
-	}
+	vertical-align: middle;
 }
 
 input[type="submit"], button, .button

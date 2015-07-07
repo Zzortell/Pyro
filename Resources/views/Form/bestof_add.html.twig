@@ -1,0 +1,12 @@
+{% form_theme form 'ZzPyroBundle:Form:form_theme.html.twig' %}
+
+{{ form_start(form) }}
+	{{ form_errors(form) }}
+	{{ form_row(form.name) }}
+	<div class="form_sub">{{ form_row(form.channels) }}</div>
+	<div class="form_sub">
+		{{ form_row(form.videos) }}
+		{{ form_row(form.externalVideos) }}
+	</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}

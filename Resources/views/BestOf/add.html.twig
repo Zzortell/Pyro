@@ -12,7 +12,8 @@
 {% block bodier %}
 {% autoescape false %}
 	<section id="bestof">
-		
+		<h1>{{ 'add.title' |trans }}</h1>
+		{{ render(controller('ZzPyroBundle:Form/BestOf:add')) }}
 	</section>
 {% endautoescape %}
 {% endblock %}

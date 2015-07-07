@@ -13,7 +13,7 @@
 				<section class="video_more form_container">
 					<div id="youtube_player_video___id__"></div>
 					
-					<h1>Proposer un extrait</h1>
+					<h1>{{ 'extract.title' |trans }}</h1>
 					{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 						<p>{{ 'extract.not_auth' |trans }}</p>
 					{% else %}

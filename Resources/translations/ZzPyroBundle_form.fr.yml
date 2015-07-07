@@ -6,3 +6,16 @@ form:
         externalVideo.label:    ou
         startSeconds.label:     Début :
         endSeconds.label:       Fin :
+    bestof:
+        name.label:             Nom :
+        channels:
+            label:                  Chaînes
+            prototype:
+                label:                  Chaîne
+                idOrUser.label:         ID ou username :
+        videos.label:           Vidéos
+        externalVideos:
+            label:                  ou
+            prototype:
+                label:                  Vidéo
+                id.label:               ID :

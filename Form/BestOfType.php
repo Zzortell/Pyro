@@ -33,7 +33,7 @@ class BestOfType extends AbstractType
                 'allow_delete'  => true,
                 'mapped'    => false
             ])
-            ->add('save',       'submit')
+            ->add('save',       'submit', [ 'label' => 'form.save' ])
         ;
     }
     
@@ -43,7 +43,8 @@ class BestOfType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Zz\PyroBundle\Entity\BestOf'
+            'data_class' => 'Zz\PyroBundle\Entity\BestOf',
+            'translation_domain' => 'ZzPyroBundle_form'
         ));
     }
 

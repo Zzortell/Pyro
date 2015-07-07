@@ -4,7 +4,11 @@ published:  Publié le %date%
 videos:     Vidéos :
 none:       Aucune vidéo n'a été ajoutée à ce best-of.
 
+add:
+    title:      Proposer un best-of
+
 extract:
+    title:      Proposer un extrait
     not_auth:   Vous devez être authentifié pour proposer un extrait.
     confirm:    Votre proposition a bien été ajoutée.
     resubmit:   Soumettre un nouvel extrait

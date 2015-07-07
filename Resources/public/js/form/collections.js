@@ -13,7 +13,7 @@ function manageCollection ( collection ) {
 	;
 	
 	// Ajout du button#add_channel
-	collection.append(addButton);
+	collection.parent().append(addButton);
 	addButton.on('click', addField);
 	
 	// Compteur de champs
