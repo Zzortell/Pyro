@@ -9,7 +9,21 @@ jQuery(function($){
 		videos.on('click', function ( e ) {
 			e.preventDefault();
 			
-			var id = this.id;
+			history.replaceState(null, null, window.location.pathname + '#' + this.id);
+			selectVideo($(this));
+		});
+	
+		// Listen popstate event
+		$(window).on('popstate', onPopstate);
+		onPopstate();
+	
+		function onPopstate () {
+			var video = videos.filterBy('id', urlObject().hash);
+			selectVideo(video);
+		}
+		
+		function selectVideo ( video ) {
+			var id = video.attr('id');
 			var video_more = $('.video_more');
 			video_more.css('display', 'none');
 			video_more = video_more.filterBy('for', id);
@@ -17,7 +31,7 @@ jQuery(function($){
 			if ( video_more.length === 0 ) {
 				video_more = $(prototype.html().replace(/__id__/g, id));
 				video_more.attr('for', id);
-				$(this).parent().after(video_more);
+				video.parent().after(video_more);
 				
 				listenYt(function () {
 					var player = new YT.Player('youtube_player_video_' + id, {
@@ -48,7 +62,7 @@ jQuery(function($){
 			} else {
 				video_more.css('display', 'block');
 			}
-		});
+		}
 	}
 	
 	function controlExtractForm ( player ) {
