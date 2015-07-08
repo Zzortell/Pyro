@@ -1,17 +1,18 @@
 jQuery(function($){
 	// BestOf
 	var bestOf = {
-		form: $('[name="bestof"]'),
-		collections: [
+		form: $('[name="bestof"]')
+	};
+	controlForm(bestOf.form, function () {
+		collections = [
 			$('#bestof_channels'),
 			$('#bestof_externalVideos')
-		]
-	};
-	
-	manageCollections(bestOf.collections);
-	transformChannelsUrlToId(bestOf.form, bestOf.collections[0]);
-	transformVideosUrlToId(bestOf.form, bestOf.collections[1]);
-	controlForm(bestOf.form, function () {});
+		];
+		
+		manageCollections(collections);
+		transformChannelsUrlToId(this, collections[0]);
+		transformVideosUrlToId(this, collections[1]);
+	});
 	
 	// Extract
 	var extract = {
