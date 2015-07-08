@@ -27,12 +27,12 @@ class BestOf
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\Type("string", message="BestOf's name should be a {{ type }}.")
-     * @Assert\Length(max=255, maxMessage="BestOf's name is too long. It should have {{ limit }} characters or less.")
-     * @Assert\NotBlank(message="BestOf's name should not be blank.")
+     * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\Type("string", message="BestOf's title should be a {{ type }}.")
+     * @Assert\Length(max=255, maxMessage="BestOf's title is too long. It should have {{ limit }} characters or less.")
+     * @Assert\NotBlank(message="BestOf's title should not be blank.")
      */
-    private $name;
+    private $title;
 
     /**
      * @var \DateTime
@@ -128,27 +128,27 @@ class BestOf
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      *
      * @return BestOf
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**

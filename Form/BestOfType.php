@@ -25,7 +25,7 @@ class BestOfType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',       'text')
+            ->add('title',      'text')
             ->add('channels',   'collection', [
                 'type'          => 'channel',
                 'allow_add'     => true,

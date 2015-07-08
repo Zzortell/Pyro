@@ -20,7 +20,7 @@ class ExtractType extends AbstractType
 		$builder
 			->add('bestof', 		'entity', [
 				'class' 	=> 'ZzPyroBundle:BestOf',
-				'property' 	=> 'name',
+				'property' 	=> 'title',
 				'multiple' 	=> false
 			])
 			->add('video', 			'entity', [

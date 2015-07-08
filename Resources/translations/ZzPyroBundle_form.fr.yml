@@ -7,7 +7,7 @@ form:
         startSeconds.label:     Début :
         endSeconds.label:       Fin :
     bestof:
-        name.label:             Nom :
+        title.label:            Nom :
         channels:
             label:                  Chaînes concernées (autres que celle d'izzyManiaKK)
             prototype:
