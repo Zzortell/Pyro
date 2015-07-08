@@ -6,6 +6,16 @@ none:       Aucune vidéo n'a été ajoutée à ce best-of.
 
 add:
     title:      Proposer un best-of
+    caution:    |
+        <b>Important :</b><br />
+        Proposer un best-of implique la <b>responsabilité</b> de prendre en charge
+        sa réalisation.
+        Son auteur doit être disponible afin de pouvoir dialoguer avec la communauté,
+        faire avancer la sélection des extraits, et mener à bien la réalisation
+        du best-of.<br />
+        Il doit également se tenir <b>à l'écoute des avis extérieurs</b>
+        et être capable de <b>réaliser lui-même le montage</b>.<br />
+        Le best-of réalisé sera soumis à l'appréciation d'un admin avant sa publication.
 
 extract:
     title:      Proposer un extrait

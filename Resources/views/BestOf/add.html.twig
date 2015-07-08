@@ -13,6 +13,9 @@
 {% autoescape false %}
 	<section id="bestof">
 		<h1>{{ 'add.title' |trans }}</h1>
+		<p class="caution">
+			{{ 'add.caution' |trans }}
+		</p>
 		{{ render(controller('ZzPyroBundle:Form/BestOf:add')) }}
 	</section>
 {% endautoescape %}
