@@ -2,6 +2,10 @@ function controlForm ( form, callback, args ) {
 	callback.apply(form, args);
 	
 	form.on('submit', function ( e ) {
+		if ( e.isDefaultPrevented() ) {
+			return;
+		}
+		
 		e.preventDefault();
 		
 		var data = $(this).serialize();

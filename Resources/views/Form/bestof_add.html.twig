@@ -1,12 +1,25 @@
-{% form_theme form 'ZzPyroBundle:Form:form_theme.html.twig' %}
+{% trans_default_domain 'ZzPyroBundle_bestof' %}
 
-{{ form_start(form) }}
-	{{ form_errors(form) }}
-	{{ form_row(form.title) }}
-	<div class="form_sub">{{ form_row(form.channels) }}</div>
-	<div class="form_sub">
-		{{ form_row(form.videos) }}
-		{{ form_row(form.externalVideos) }}
+{% if form is defined %}
+	{% form_theme form 'ZzPyroBundle:Form:form_theme.html.twig' %}
+	
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+		{{ form_row(form.title) }}
+		<div class="form_sub">{{ form_row(form.channels) }}</div>
+		<div class="form_sub">
+			{{ form_row(form.videos) }}
+			{{ form_row(form.externalVideos) }}
+		</div>
+	{{ form_rest(form) }}
+	{{ form_end(form) }}
+{% else %}
+	<div class="form_container form_confirm">
+		<p>
+			{{ 'add.confirm' |trans }}
+		</p>
+		<a href="{{ path('zz_pyro_bestof_display', { 'id': id }) }}" class="button">
+			{{ 'add.modif' |trans }}
+		</a>
 	</div>
-{{ form_rest(form) }}
-{{ form_end(form) }}
+{% endif %}
