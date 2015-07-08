@@ -55,15 +55,19 @@ class BestOf
      *
      * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Channel", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Collection
      * @Assert\Valid
-     * @Assert\NotNull
+     * @Assert\Count(min=1, minMessage="The BestOf should be linked to at least {{ limit }} channel.")
+     * @Assert\All({ @Assert\NotNull(message="Channels should not be null.") })
      */
     private $channels;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Video")
+     * @ORM\ManyToMany(targetEntity="Zz\PyroBundle\Entity\Video", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
+     * @Assert\Collection
      * @Assert\Valid
+     * @Assert\All({ @Assert\NotNull(message="Videos should not be null.") })
      */
     private $videos;
 

@@ -31,6 +31,7 @@ function manageCollection ( collection ) {
 	function addField () {
 		var fields = $( prototype.replace(/__name__/g, index) );
 		addDeleteButton(fields);
+		removeInputsLabels(fields.find('input'));
 		collection.append(fields);
 		index++;
 	}

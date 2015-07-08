@@ -36,6 +36,7 @@ services:
 
     zz_pyro.form.bestof:
         class: Zz\PyroBundle\Form\BestOfType
+        arguments: [@zz_pyro.repo.channel]
         tags:
             - { name: form.type, alias: bestof }
 

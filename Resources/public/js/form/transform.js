@@ -1,64 +1,77 @@
 function transformVideosUrlToId ( form, collection ) {
-	inputs = collection.find(':regex(id,^[^_]+_externalVideos_\\d+_id$)');
-	inputs.each(function () {
-		transformVideoUrlToId(form, $(this));
+	form.on('submit', function ( e ) {
+		var inputs = collection.find(':regex(id,^[^_]+_externalVideos_\\d+_id$)');
+		inputs.each(function () {
+			if ( $(this).val() ) {
+				var id = formatVideoUrlToId($(this).val());
+				if ( id ) {
+					$(this).val(id);
+				} else {
+					e.preventDefault();
+					warn('Can\'t get the Youtube video\'s id. Please put a valid video url.');
+				}
+			}
+		});
 	});
-	inputs.prev('label').text('Url :');
+	
+	var inputs = collection.find(':regex(id,^[^_]+_externalVideos_\\d+_id$)');
+	removeInputsLabels(inputs);
 	collection.prev('label').remove();
-	inputs.parent().parent().siblings('label').remove();
 }
 
-function transformVideoUrlToId ( form, text ) {
-	form.on('submit', function ( e ) {
-		if ( text.val() ) {
-			url = urlObject({ 'url': text.val() });
-			
-			if (
-				url.hostname.indexOf('youtube.com') === -1
-				|| url.pathname !== '/watch'
-				|| typeof url.parameters.v === 'undefined'
-			) {
-				e.preventDefault();
-				
-				warn('Can\'t get the Youtube video\'s id. Please put a valid video url.');
-			}
-			
-			text.val( url.parameters.v );
-		}
-	});
+function formatVideoUrlToId ( url ) {
+	url = urlObject({ 'url': url });
+	
+	if (
+		url.hostname.indexOf('youtube.com') === -1
+		|| url.pathname !== '/watch'
+		|| typeof url.parameters.v === 'undefined'
+	) {
+		return false;
+	}
+	
+	return url.parameters.v;
 }
 
 function transformChannelsUrlToId ( form, collection ) {
-	inputs = collection.find(':regex(id,^[^_]+_channels_\\d+_idOrUser$)');
-	inputs.each(function () {
-		transformChannelUrlToId(form, $(this));
+	form.on('submit', function ( e ) {
+		var inputs = collection.find(':regex(id,^[^_]+_channels_\\d+_idOrUser$)');
+		inputs.each(function () {
+			if ( $(this).val() ) {
+				var id = formatChannelUrlToId($(this).val());
+				if ( id ) {
+					$(this).val(id);
+				} else {
+					e.preventDefault();
+					warn('Can\'t get the Youtube channel or user\'s id. Please put a valid channel url.');
+				}
+			}
+		});
 	});
-	inputs.prev('label').text('Url :');
-	inputs.parent().parent().siblings('label').remove();
+	
+	var inputs = collection.find(':regex(id,^[^_]+_channels_\\d+_idOrUser$)');
+	removeInputsLabels(inputs);
 }
 
-function transformChannelUrlToId ( form, text ) {
-	form.on('submit', function ( e ) {
-		if ( text.val() ) {
-			url = urlObject({ 'url': text.val() });
+function formatChannelUrlToId ( url ) {
+	url = urlObject({ 'url': url });
 			
-			if (
-				url.hostname.indexOf('youtube.com') !== -1
-				&& url.pathname.indexOf('/channel/') === 0
-			) {
-				text.val( url.pathname.substring(9) );
-			} else if (
-				url.hostname.indexOf('youtube.com') !== -1
-				&& url.pathname.indexOf('/user/') === 0
-			) {
-				text.val( url.pathname.substring(6) );
-			} else {
-				e.preventDefault();
-				
-				warn('Can\'t get the Youtube channel or user\'s id. Please put a valid channel url.');
-			}
-		}
-	});
+	if (
+		url.hostname.indexOf('youtube.com') !== -1 && url.pathname.indexOf('/channel/') === 0
+	) {
+		return url.pathname.substring(9);
+	} else if (
+		url.hostname.indexOf('youtube.com') !== -1 && url.pathname.indexOf('/user/') === 0
+	) {
+		return 'user:' + url.pathname.substring(6);
+	} else {
+		return false;
+	}
+}
+
+function removeInputsLabels ( inputs ) {
+	inputs.prev('label').text('Url :');
+	inputs.parent().parent().siblings('label').remove();
 }
 
 function transformSecondsToInt ( form, text ) {

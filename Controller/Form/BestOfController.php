@@ -14,8 +14,10 @@ class BestOfController extends Controller
 		$bestof = new BestOf;
 		$bestof->setManager($this->get('zz_pyro.profile_manager')->getProfile());
 		
+		$path = $this->generateUrl('zz_pyro_form_bestof_add');
+		
 		$form = $this->createForm('bestof', $bestof, [
-			'action' => $this->generateUrl('zz_pyro_form_bestof_add')
+			'action' => $path
 		]);
 		
 		if ( $form->handleRequest($request)->isValid() ) {
@@ -23,7 +25,9 @@ class BestOfController extends Controller
 			$em->persist($bestof);
 			$em->flush();
 
-			return $this->render('ZzPyroBundle:Form:confirm.html.twig');
+			return $this->render('ZzPyroBundle:Form:confirm.html.twig', [
+				'path' => $path
+			]);
 		}
 		
 		return $this->render('ZzPyroBundle:Form:bestof_add.html.twig', [

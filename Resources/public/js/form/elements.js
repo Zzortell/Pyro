@@ -20,6 +20,7 @@ jQuery(function($){
 		externalVideoIdLabel: 	$('[for="extract_externalVideo_id"]')
 	};
 	
-	manageSelectOrText(extract.videoSelect, extract.externalVideoIdInput);
-	transformVideoUrlToId(extract.form, extract.externalVideoIdInput, extract.externalVideoIdLabel);
+	// Todo
+	// manageSelectOrText(extract.videoSelect, extract.externalVideoIdInput);
+	// transformVideoUrlToId(extract.form, extract.externalVideoIdInput, extract.externalVideoIdLabel);
 });

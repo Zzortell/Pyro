@@ -9,7 +9,7 @@ form:
     bestof:
         name.label:             Nom :
         channels:
-            label:                  Chaînes
+            label:                  Chaînes concernées (autres que celle d'izzyManiaKK)
             prototype:
                 label:                  Chaîne
                 idOrUser.label:         ID ou username :
