@@ -17,22 +17,12 @@
 
 {% block javascripts %}
 	{{ parent() }}
-	{% if bestof.done %}
-		<script>
-			var player;
-			listenYt(function () {
-				player = new YT.Player('youtube_player', {
-					videoId: '{{ bestof.video.id }}',
-				});
-			});
-		</script>
-	{% endif %}
 	<script src="{{ asset('bundles/zzpyro/js/video.js') }}"></script>
 {% endblock %}
 
 {% block bodier %}
 {% autoescape false %}
-	<section id="bestof">
+	<section id="bestof" class="admin">
 		<h1>
 			{{ 'bestof' |trans }}
 			<a href="{{ path('zz_pyro_bestof_display', { 'id': bestof.id }) }}">

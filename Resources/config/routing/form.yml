@@ -6,6 +6,10 @@ zz_pyro_form_bestof:
     resource: "@ZzPyroBundle/Resources/config/routing/form/bestof.yml"
     prefix:   /bestof
 
-zz_pyro_video:
+zz_pyro_form_video:
     resource: "@ZzPyroBundle/Resources/config/routing/form/video.yml"
     prefix:   /video
+
+zz_pyro_form_channel_izzy:
+    path:     /channel/izzy
+    defaults: { _controller: ZzPyroBundle:Form/Channel:addIzzy }

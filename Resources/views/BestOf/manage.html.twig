@@ -1,0 +1,43 @@
+{% extends 'ZzPyroBundle::layout.html.twig' %}
+
+{% trans_default_domain 'ZzPyroBundle_bestof' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{% stylesheets 'bundles/zzpyro/css/bestof.less' filter='cssrewrite' %}
+		<link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block js_lib %}
+	{{ parent() }}
+	<script src="https://www.youtube.com/iframe_api"></script>
+	<script src="{{ asset('bundles/zzpyro/js/listen_yt.js') }}"></script>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/zzpyro/js/video.js') }}"></script>
+{% endblock %}
+
+{% block bodier_attr %}class="admin"{% endblock %}
+
+{% block bodier %}
+{% autoescape false %}
+	<section id="bestof">
+		<nav>
+			<h1>{{ 'manage.bestofs' |trans }}</h1>
+				
+			{% for bestof in bestofs %}
+				<div>
+					<p>
+						<a href="{{ path('zz_pyro_bestof_display', { 'id': bestof.id }) }}">
+							{{ bestof.title }}
+						</a>
+					</p>
+				</div>
+			{% endfor %}
+		</nav>
+	</section>
+{% endautoescape %}
+{% endblock %}

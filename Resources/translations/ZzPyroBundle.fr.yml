@@ -5,6 +5,8 @@ header:
     subtitle:   Création communautaire de best-of d'izzyManiaKK
     link_yt:    Chaîne Youtube
     link_izzi:  Chaîne d'izzyManiakk
+nav:
+    manage:     Mes best-of
     logout:     Se déconnecter
 
 entity:

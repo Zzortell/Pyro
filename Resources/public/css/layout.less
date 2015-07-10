@@ -41,6 +41,7 @@ body
 		left: 0;
 		width: 50%;
 		background-color: #36000F;
+		z-index: -1;
 	}
 }
 
@@ -117,6 +118,8 @@ body
 	position: relative;
 	margin: 0;
 	padding: 0;
+	min-height: 100vh;
+	font-size: 1.2em;
 	
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/@color_izzy+0,510016+100 */
 	background: @color_izzy; /* Old browsers */
@@ -128,12 +131,28 @@ body
 	background: linear-gradient(-135deg, @color_izzy 0%, @color_maniakk 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color_izzy', endColorstr='@color_maniakk',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	
+	> nav
+	{
+		max-width: 1500px;
+		margin: auto;
+		text-align: right;
+		font-size: 1.5em;
+		
+		> *
+		{
+			&:extend(.button);
+		}
+	}
+	
 	#bodier
 	{
-		min-height: 100vh; //TO DELETE
 		max-width: 800px;
 		margin: auto;
-		font-size: 1.2em;
+		
+		&.admin
+		{
+			max-width: 1500px;
+		}
 	
 		.meta
 		{

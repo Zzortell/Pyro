@@ -53,16 +53,19 @@
 							{{ 'header.link_izzi' |trans }}
 						</a>
 					</p>
-					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-						<a href="{{ path('fos_user_security_logout') }}">
-							{{ 'header.logout' |trans }}
-						</a>
-					{% endif %}
 				</div>
 			</header>
 		</div>
 		<div id="bodier_container">
-			<section id="bodier">
+			<nav>
+				<a href="{{ path('zz_pyro_bestof_manage') }}">{{ 'nav.manage' |trans }}</a>
+				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+					<a href="{{ path('fos_user_security_logout') }}">
+						{{ 'nav.logout' |trans }}
+					</a>
+				{% endif %}
+			</nav>
+			<section id="bodier" {% block bodier_attr %}{% endblock %}>
 				{% block bodier %}{% endblock %}
 			</section>
 		</div>

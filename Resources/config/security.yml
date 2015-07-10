@@ -1,0 +1,4 @@
+security:
+    access_control:
+        - { path: ^/pyro/bestof/add, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/pyro/bestof/manage, roles: IS_AUTHENTICATED_REMEMBERED }

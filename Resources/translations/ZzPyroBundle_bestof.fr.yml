@@ -24,3 +24,6 @@ extract:
     not_auth:   Vous devez être authentifié pour proposer un extrait.
     confirm:    Votre proposition a bien été ajoutée.
     resubmit:   Soumettre un nouvel extrait
+
+manage:
+    bestofs:

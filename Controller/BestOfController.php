@@ -19,4 +19,17 @@ class BestOfController extends Controller
 	{
 		return $this->render('ZzPyroBundle:BestOf:add.html.twig');
 	}
+	
+	public function manageAction()
+	{
+		$profile = $this->get('zz_pyro.profile_manager')->getProfile();
+		
+		$em = $this->getDoctrine()->getManager();
+		
+		$bestofs = $em->getRepository('ZzPyroBundle:BestOf')->findByManager($profile);
+		
+		return $this->render('ZzPyroBundle:BestOf:manage.html.twig', [
+			'bestofs' => $bestofs
+		]);
+	}
 }
