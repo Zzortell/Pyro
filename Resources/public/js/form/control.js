@@ -1,14 +1,21 @@
-function controlForm ( form, callback, args ) {
-	callback.apply(form, args);
+function controlForm ( form, options ) {
+	var dispatcher = new EventDispatcher ();
+	dispatcher.listen('control', options.control);
+	dispatcher.listen('submit', options.submit);
+	
+	dispatcher.dispatch('control', { form: form });
 	
 	form.on('submit', function ( e ) {
+		clonedForm = form.clone();
+		dispatcher.dispatch('submit', { form: clonedForm, originalEvent: e });
+		
+		var data = clonedForm.serialize();
+		
 		if ( e.isDefaultPrevented() ) {
 			return;
 		}
 		
 		e.preventDefault();
-		
-		var data = $(this).serialize();
 		
 		$.ajax({
 			url:		$(this).attr('action'),
@@ -25,7 +32,7 @@ function controlForm ( form, callback, args ) {
 		
 		var newForm = response.filter('form');
 		newForm.each(function () {
-			controlForm($(this), callback, args);
+			controlForm($(this), options);
 		});
 		
 		var confirm = response.filter('.form_confirm');
@@ -39,4 +46,6 @@ function controlForm ( form, callback, args ) {
 			});
 		});
 	}
+	
+	return dispatcher;
 }

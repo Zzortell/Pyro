@@ -40,7 +40,34 @@ jQuery(function($){
 			
 					// Control form submittion
 					var form = video_more.find('[name="bestof_extract"]');
-					controlForm(form, controlExtractForm, [ player ]);
+					controlForm(form, {
+						control: controlExtractForm
+					});
+					
+					function controlExtractForm ( e ) {
+						// Handle seonds fields submittion
+						var seconds = e.form.find('.seconds');
+						
+						seconds.each(function () {
+							transformSecondsToInt(e.form, $(this));
+						});
+						
+						// Add capture buttons
+						seconds.each(function () {
+							$(this).after($(
+								'<button type="button" class="capture" for="' + this.id + '">Capturer</button>'
+							));
+						});
+						
+						var capture = e.form.find('.capture');
+						capture.on('click', function () {
+							var id = $(this).attr('for');
+							$(this).siblings('#' + id).val(
+								formatIntToSeconds(player.getCurrentTime(), id.indexOf('end') !== -1)
+							);
+							$(this).attr('captured', '');
+						});
+					}
 					
 					// Listen player stateChange
 					var timerId;
@@ -63,31 +90,5 @@ jQuery(function($){
 				video_more.css('display', 'block');
 			}
 		}
-	}
-	
-	function controlExtractForm ( player ) {
-		var form = this;
-		// Handle seonds fields submittion
-		var seconds = form.find('.seconds');
-		
-		seconds.each(function () {
-			transformSecondsToInt(form, $(this));
-		});
-		
-		// Add capture buttons
-		seconds.each(function () {
-			$(this).after($(
-				'<button type="button" class="capture" for="' + this.id + '">Capturer</button>'
-			));
-		});
-		
-		var capture = form.find('.capture');
-		capture.on('click', function () {
-			var id = $(this).attr('for');
-			$(this).siblings('#' + id).val(
-				formatIntToSeconds(player.getCurrentTime(), id.indexOf('end') !== -1)
-			);
-			$(this).attr('captured', '');
-		});
 	}
 });

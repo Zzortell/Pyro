@@ -1,22 +1,16 @@
-function transformVideosUrlToId ( form, collection ) {
-	form.on('submit', function ( e ) {
-		var inputs = collection.find(':regex(id,^[^_]+_externalVideos_\\d+_id$)');
-		inputs.each(function () {
-			if ( $(this).val() ) {
-				var id = formatVideoUrlToId($(this).val());
-				if ( id ) {
-					$(this).val(id);
-				} else {
-					e.preventDefault();
-					warn('Can\'t get the Youtube video\'s id. Please put a valid video url.');
-				}
+function transformVideosUrlToId ( e ) {
+	var inputs = e.form.find(':regex(id,^[^_]+_externalVideos_\\d+_id$)');
+	inputs.each(function () {
+		if ( $(this).val() ) {
+			var id = formatVideoUrlToId($(this).val());
+			if ( id ) {
+				$(this).val(id);
+			} else {
+				e.originalEvent.preventDefault();
+				warn('Can\'t get the Youtube video\'s id. Please put a valid video url.');
 			}
-		});
+		}
 	});
-	
-	var inputs = collection.find(':regex(id,^[^_]+_externalVideos_\\d+_id$)');
-	removeInputsLabels(inputs);
-	collection.prev('label').remove();
 }
 
 function formatVideoUrlToId ( url ) {
@@ -33,24 +27,19 @@ function formatVideoUrlToId ( url ) {
 	return url.parameters.v;
 }
 
-function transformChannelsUrlToId ( form, collection ) {
-	form.on('submit', function ( e ) {
-		var inputs = collection.find(':regex(id,^[^_]+_channels_\\d+_idOrUser$)');
-		inputs.each(function () {
-			if ( $(this).val() ) {
-				var id = formatChannelUrlToId($(this).val());
-				if ( id ) {
-					$(this).val(id);
-				} else {
-					e.preventDefault();
-					warn('Can\'t get the Youtube channel or user\'s id. Please put a valid channel url.');
-				}
+function transformChannelsUrlToId ( e ) {
+	var inputs = e.form.find(':regex(id,^[^_]+_channels_\\d+_idOrUser$)');
+	inputs.each(function () {
+		if ( $(this).val() ) {
+			var id = formatChannelUrlToId($(this).val());
+			if ( id ) {
+				$(this).val(id);
+			} else {
+				e.originalEvent.preventDefault();
+				warn('Can\'t get the Youtube channel or user\'s id. Please put a valid channel url.');
 			}
-		});
+		}
 	});
-	
-	var inputs = collection.find(':regex(id,^[^_]+_channels_\\d+_idOrUser$)');
-	removeInputsLabels(inputs);
 }
 
 function formatChannelUrlToId ( url ) {
